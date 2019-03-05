@@ -13,22 +13,12 @@ import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
-import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
-    Button starlist;
-    Spinner starSpinner;
-    String[] databasevalues;
-    String[] starNames;
-    TextView databaseView;
-    TextView name;
+    Button information;
 
-    StarsDB starDB;
     /*/////////////////////////////////
      * ON CREATE
      *
@@ -38,27 +28,17 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        starlist = (Button) findViewById(R.id.starlist);
-        starSpinner = (Spinner) findViewById(R.id.starspinner);
-        databaseView = (TextView) findViewById(R.id.databasevalues);
-        name = (TextView) findViewById(R.id.starvalue);
+        information = (Button) findViewById(R.id.information);
 
-        starDB = new StarsDB(getApplicationContext());
 
-        starNames = starDB.getStarNames();
-        ArrayAdapter<String> starAdapter = new ArrayAdapter<String>(getBaseContext(), R.layout.list_item, starNames);
-        starAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        starSpinner.setAdapter(starAdapter);
 
-        starlist.setOnClickListener(new View.OnClickListener() {
-
+        information.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent infoIntent = new Intent(getBaseContext(), Information.class);
+                startActivity(infoIntent);
             }
-
         });
-
     }
 
 

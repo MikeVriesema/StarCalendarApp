@@ -1,0 +1,33 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<Spinner
+		android:id="@+id/starspinner"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentTop="true"/>
+
+	<TextView
+		android:id="@+id/starvalue"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignEnd="@id/starspinner"
+		android:layout_alignBottom="@id/starspinner"
+		android:layout_marginEnd="46dp"
+		android:layout_marginBottom="-25dp"
+		android:text="Star Name" />
+
+	<TextView
+		android:id="@+id/databasevalues"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentBottom="true"
+		android:layout_marginLeft="0dp"
+		android:layout_marginBottom="112dp"
+		android:text="" />
+
+</RelativeLayout>
+
+

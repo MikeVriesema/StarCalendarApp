@@ -7,6 +7,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.content.Intent;
+import android.os.Bundle;
+import android.app.Activity;
+
 
 import java.util.ArrayList;
 
@@ -17,8 +21,10 @@ public class StarsDB {
      ********************/
     //The index (key) column name for use in where clauses.
     public static final String KEY_ID = "_id";
-    //The name and column index
+    //The name of stars
     public static final String KEY_STAR_NAME = "star_name";
+    //The description of stars
+    public static final String KEY_STAR_DESCRIPTION = "star_description";
 
     private Context context;
 
@@ -33,17 +39,14 @@ public class StarsDB {
                 ModuleDBOpenHelper.DATABASE_VERSION);
 
         // populate the database with some data in case it is empty
-        if (getAll().length == 0) {
-            this.addRow("Moon");
-            this.addRow("Sun");
-            this.addRow("Eclipse");
-            this.addRow("Meteors");
-            this.addRow("ISS");
-            this.addRow("Spacecraft");
+        String[] planets = context.getResources().getStringArray(R.array.space_array);
+        String[] planetsdesc = context.getResources().getStringArray(R.array.spacedesc_array);
+        for(int i = 0;i<planets.length;i++){
+            this.addRow(planets[i],planetsdesc[i]);
         }
 
-
     }
+
 
     /************************
      * Standard Database methods
@@ -54,12 +57,13 @@ public class StarsDB {
         moduleDBOpenHelper.close();
     }
 
-    public void addRow(String starName) {
+    public void addRow(String starName, String starDescription) {
         // Create a new row of values to insert.
         ContentValues newValues = new ContentValues();
 
         // Assign values for each row.
         newValues.put(KEY_STAR_NAME, starName);
+        newValues.put(KEY_STAR_DESCRIPTION, starDescription);
 
         // Insert the row into your table
         SQLiteDatabase db = moduleDBOpenHelper.getWritableDatabase();
@@ -98,10 +102,10 @@ public class StarsDB {
     public String[] getAll() {
 
         ArrayList<String> outputArray = new ArrayList<String>();
-        String[] result_columns = new String[]{
-                KEY_STAR_NAME};
+        String[] result_columns = new String[]{KEY_STAR_NAME,KEY_STAR_DESCRIPTION};
 
         String starName;
+        String starDescription;
         String where = null;
         String whereArgs[] = null;
         String groupBy = null;
@@ -115,8 +119,8 @@ public class StarsDB {
         boolean result = cursor.moveToFirst();
         while (result) {
             starName = cursor.getString(cursor.getColumnIndex(KEY_STAR_NAME));
-
-            outputArray.add(starName);
+            starDescription = cursor.getString(cursor.getColumnIndex(KEY_STAR_DESCRIPTION));
+            outputArray.add(starName + "\n" +  starDescription);
             result = cursor.moveToNext();
 
         }
@@ -154,6 +158,35 @@ public class StarsDB {
         return outputArray.toArray(new String[outputArray.size()]);
     }
 
+    /*
+     * Obtain all star descriptions from the database and return in String[]
+     */
+    public String[] getStarDescriptions() {
+
+        ArrayList<String> outputArray = new ArrayList<String>();
+        String[] result_columns = new String[]{
+                KEY_STAR_DESCRIPTION};
+
+        String starDescription;
+        String where = null;
+        String whereArgs[] = null;
+        String groupBy = null;
+        String having = null;
+        String order = null;
+
+        SQLiteDatabase db = moduleDBOpenHelper.getWritableDatabase();
+        Cursor cursor = db.query(ModuleDBOpenHelper.DATABASE_TABLE,
+                result_columns, where,
+                whereArgs, groupBy, having, order);
+        boolean result = cursor.moveToFirst();
+        while (result) {
+            starDescription = cursor.getString(cursor.getColumnIndex(KEY_STAR_DESCRIPTION));
+            outputArray.add(starDescription);
+            result = cursor.moveToNext();
+        }
+        return outputArray.toArray(new String[outputArray.size()]);
+    }
+
 
 
 
@@ -170,9 +203,10 @@ public class StarsDB {
 
         // SQL Statement to create a new database.
         private static final String DATABASE_CREATE = "create table " +
-                DATABASE_TABLE + " (" + KEY_ID +
-                " integer primary key autoincrement, " +
-                KEY_STAR_NAME + " text not null);";
+                DATABASE_TABLE + " (" +
+                KEY_ID + " integer primary key autoincrement, " +
+                KEY_STAR_NAME + " text not null, " +
+                KEY_STAR_DESCRIPTION + " text not null);";
 
 
         public ModuleDBOpenHelper(Context context, String name,

@@ -3,4 +3,32 @@
     <string name="user">User</string>
     <string name="menu_settings">Settings</string>
     <string name="starlist">Star List</string>
+    <string name="information">Information</string>
+
+
+
+    <string-array name="space_array">
+        <item>Mercury</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+        <item>Moon</item>
+        <item>Sun</item>
+        <item>ISS</item>
+        <item>Spacecraft</item>
+        <item>Meteor</item>
+    </string-array>
+
+    <string-array name="spacedesc_array">
+        <item>A year on Mercury is just 88 days long. It is also the smallest planet.</item>
+        <item>Venus is the second brightest natural object in the sky. One day on Venus is longer than one year.</item>
+        <item>It\'s home</item>
+        <item>Mars is the fourth planet from the Sun and is the second smallest planet in the solar system. </item>
+        <item>The Moon of the Earth. Does one full revolution of the Earth every 24 Hours</item>
+        <item>The Sun accounts for 99.86% of the mass in the solar system. Over one million Earth\'s could fit inside the Sun.</item>
+        <item>The space station has been continuously occupied since November 2000. It travels at a speed of five miles per second, orbiting Earth about every 90 minutes.</item>
+        <item>The position of the Voyager 1 spacecraft is some 12.5 billion miles away.</item>
+        <item>A meteoroid is a small rock or particle of debris in our solar system.The Geminids spray up to 40 meteors per hour at its peak.</item>
+    </string-array>
+
 </resources>
