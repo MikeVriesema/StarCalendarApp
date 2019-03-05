@@ -9,14 +9,13 @@
 		android:layout_alignParentTop="true"/>
 
 	<TextView
-		android:id="@+id/starvalue"
+		android:id="@+id/stardescriptions"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_alignEnd="@id/starspinner"
-		android:layout_alignBottom="@id/starspinner"
-		android:layout_marginEnd="46dp"
-		android:layout_marginBottom="-25dp"
-		android:text="Star Name" />
+		android:layout_below="@+id/starspinner"
+		android:text="@string/information"
+		android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+		android:textSize="15sp" />
 
 	<TextView
 		android:id="@+id/databasevalues"

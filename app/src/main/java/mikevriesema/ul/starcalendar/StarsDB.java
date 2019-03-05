@@ -37,14 +37,26 @@ public class StarsDB {
         this.context = context;
         moduleDBOpenHelper = new ModuleDBOpenHelper(context, ModuleDBOpenHelper.DATABASE_NAME, null,
                 ModuleDBOpenHelper.DATABASE_VERSION);
-
+        String[] result_columns = new String[]{KEY_ID};
         // populate the database with some data in case it is empty
-        String[] planets = context.getResources().getStringArray(R.array.space_array);
-        String[] planetsdesc = context.getResources().getStringArray(R.array.spacedesc_array);
-        for(int i = 0;i<planets.length;i++){
-            this.addRow(planets[i],planetsdesc[i]);
-        }
 
+        String where = null;
+        String whereArgs[] = null;
+        String groupBy = null;
+        String having = null;
+        String order = null;
+
+        SQLiteDatabase db = moduleDBOpenHelper.getWritableDatabase();
+        Cursor cursor = db.query(ModuleDBOpenHelper.DATABASE_TABLE, result_columns, where, whereArgs, groupBy, having, order);
+        if (cursor.moveToFirst()) {
+
+        }else{
+            String[] planets = context.getResources().getStringArray(R.array.space_array);
+            String[] planetsdesc = context.getResources().getStringArray(R.array.spacedesc_array);
+            for (int i = 0; i < planets.length; i++) {
+                this.addRow(planets[i], planetsdesc[i]);
+            }
+        }
     }
 
 
@@ -161,15 +173,14 @@ public class StarsDB {
     /*
      * Obtain all star descriptions from the database and return in String[]
      */
-    public String[] getStarDescriptions() {
+    public String getStarDescriptions(String starName) {
 
-        ArrayList<String> outputArray = new ArrayList<String>();
         String[] result_columns = new String[]{
                 KEY_STAR_DESCRIPTION};
 
         String starDescription;
-        String where = null;
-        String whereArgs[] = null;
+        String where = KEY_STAR_NAME + "= ?";
+        String whereArgs[] = {starName};
         String groupBy = null;
         String having = null;
         String order = null;
@@ -178,13 +189,10 @@ public class StarsDB {
         Cursor cursor = db.query(ModuleDBOpenHelper.DATABASE_TABLE,
                 result_columns, where,
                 whereArgs, groupBy, having, order);
-        boolean result = cursor.moveToFirst();
-        while (result) {
-            starDescription = cursor.getString(cursor.getColumnIndex(KEY_STAR_DESCRIPTION));
-            outputArray.add(starDescription);
-            result = cursor.moveToNext();
-        }
-        return outputArray.toArray(new String[outputArray.size()]);
+        if (cursor.moveToFirst()) {
+            int index = cursor.getColumnIndex(KEY_STAR_DESCRIPTION);
+            return cursor.getString(index);
+        } else return context.getString(R.string.error_one);
     }
 
 
