@@ -18,6 +18,7 @@ import android.widget.Button;
 public class MainActivity extends Activity {
 
     Button information;
+    Button calendar;
 
     /*/////////////////////////////////
      * ON CREATE
@@ -29,6 +30,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         information = (Button) findViewById(R.id.information);
+        calendar = (Button) findViewById(R.id.myCalendar);
 
 
 
@@ -37,6 +39,13 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 Intent infoIntent = new Intent(getBaseContext(), Information.class);
                 startActivity(infoIntent);
+            }
+        });
+        calendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent calendarIntent = new Intent(getBaseContext(), Calendar.class);
+                startActivity(calendarIntent);
             }
         });
     }

@@ -56,6 +56,7 @@ public class StarsDB {
             for (int i = 0; i < planets.length; i++) {
                 this.addRow(planets[i], planetsdesc[i]);
             }
+
         }
     }
 
