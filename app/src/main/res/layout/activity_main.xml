@@ -1,30 +1,36 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:background="@color/colorPrimary">
+	android:background="@drawable/main">
 
 	<Button
 		android:id="@+id/myCalendar"
-		android:layout_width="match_parent"
+		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_above="@+id/information"
+		android:layout_centerHorizontal="true"
+		android:background="@drawable/button_corner"
 		android:text="@string/myCalendar" />
 
 	<Button
 		android:id="@+id/information"
-		android:layout_width="match_parent"
+		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
+		android:layout_centerHorizontal="true"
 		android:layout_alignParentBottom="true"
+		android:background="@drawable/button_corner"
 		android:text="@string/information" />
 
 	<TextView
 		android:id="@+id/starvalue"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_centerInParent="true"
+		android:layout_centerHorizontal="true"
+		android:layout_marginTop="120dp"
 		android:text="@string/app_name"
 		android:textAppearance="@style/TextAppearance.AppCompat.Title"
-		android:textSize="24sp" />
+		android:textColor="@color/white"
+		android:textSize="40sp" />
 
 
 </RelativeLayout>

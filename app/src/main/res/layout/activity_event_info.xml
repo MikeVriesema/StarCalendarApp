@@ -1,0 +1,43 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="350dp"
+	android:layout_height="475dp"
+	android:padding="5dp"
+	android:layout_gravity="center"
+	android:background="#646464">
+
+	<TextView
+		android:id="@+id/close"
+		android:layout_width="30dp"
+		android:layout_height="30dp"
+		android:layout_alignParentRight="true"
+		android:gravity="center"
+		android:text="@string/close"
+		android:background="@drawable/event_close"
+		android:textColor="@color/white"
+		android:textStyle="bold"/>
+
+	<ImageView
+		android:id="@+id/eventimage"
+		android:layout_width="150dp"
+		android:layout_height="150dp"
+		android:src="@drawable/event_image"
+		android:layout_centerHorizontal="true"
+		android:layout_marginTop="60dp"/>
+
+	<TextView
+		android:id="@+id/eventinfo"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_centerHorizontal="true"
+		android:layout_marginTop="230dp"
+		android:textSize="20dp"
+		android:text="@string/eventinfo"
+		android:textColor="@color/white"
+		android:textStyle="bold"/>
+
+
+
+</RelativeLayout>
+
+
