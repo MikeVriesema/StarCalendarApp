@@ -27,6 +27,8 @@
         </activity>
         <activity android:name=".CalendarMain">
         </activity>
+        <activity android:name=".Weather">
+        </activity>
     </application>
 
 </manifest>

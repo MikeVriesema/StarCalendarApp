@@ -50,6 +50,8 @@ public class Information extends Activity {
             public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 if (starNames.length>position) {
                     stardescriptions.setText(starDB.getStarDescriptions((starNames[position])));
+                    String path = starNames[position]+".png";
+                    loadImageFromStorage(path);
                 }
             }
 
