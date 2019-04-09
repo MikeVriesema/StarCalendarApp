@@ -7,6 +7,7 @@
 package mikevriesema.ul.starcalendar;
 
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
@@ -33,6 +34,10 @@ public class MainActivity extends Activity {
         information = (Button) findViewById(R.id.information);
         calendar = (Button) findViewById(R.id.myCalendar);
         weather = (Button) findViewById(R.id.weather);
+        ActionBar actionBar = getActionBar();
+        actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         weather.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,6 +59,7 @@ public class MainActivity extends Activity {
                 startActivity(calendarIntent);
             }
         });
+
     }
 
 
@@ -76,9 +82,22 @@ public class MainActivity extends Activity {
                 startActivity(preferencesIntent);
                 break;
             }
+            case R.id.help: {
+                Intent aboutIntent = new Intent(getBaseContext(), About.class);
+                startActivity(aboutIntent);
+                break;
+            }
+            case android.R.id.home:
+                // app icon in action bar clicked; go home
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 
 
 

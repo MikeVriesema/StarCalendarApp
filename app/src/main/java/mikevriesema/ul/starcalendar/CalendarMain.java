@@ -1,5 +1,6 @@
 package mikevriesema.ul.starcalendar;
 
+import android.app.ActionBar;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -21,7 +22,7 @@ import java.io.InputStream;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class CalendarMain extends Activity {
+public class CalendarMain extends MainActivity {
 
     /*/////////////////////////////////
      * ON CREATE
@@ -42,7 +43,6 @@ public class CalendarMain extends Activity {
         popDialog = new Dialog(this);
         calendar = (CalendarView) findViewById(R.id.calendar);
         dateplan = (TextView) findViewById(R.id.date);
-
 
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override

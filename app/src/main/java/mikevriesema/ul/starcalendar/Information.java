@@ -1,5 +1,6 @@
 package mikevriesema.ul.starcalendar;
 
+import android.app.ActionBar;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -14,7 +15,7 @@ import android.widget.TextView;
 import java.io.FileNotFoundException;
 
 
-public class Information extends Activity {
+public class Information extends MainActivity {
 
     Spinner starSpinner;
     String[] starNames;
@@ -36,7 +37,6 @@ public class Information extends Activity {
         databaseView = (TextView) findViewById(R.id.databasevalues);
         stardescriptions = (TextView) findViewById(R.id.stardescriptions);
         starImage = (ImageView) findViewById(R.id.starimage);
-
         starDB = new StarsDB(getApplicationContext());
 
         starNames = starDB.getStarNames();

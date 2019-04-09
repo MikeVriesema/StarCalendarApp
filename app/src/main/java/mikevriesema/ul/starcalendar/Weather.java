@@ -1,5 +1,6 @@
 package mikevriesema.ul.starcalendar;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,7 +13,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 
-public class Weather extends Activity {
+public class Weather extends MainActivity {
 
 
 
@@ -24,6 +25,7 @@ public class Weather extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.weather_information);
+ 
     }
 
 }
