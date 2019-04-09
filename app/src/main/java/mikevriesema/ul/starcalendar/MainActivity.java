@@ -19,6 +19,7 @@ public class MainActivity extends Activity {
 
     Button information;
     Button calendar;
+    Button weather;
 
     /*/////////////////////////////////
      * ON CREATE
@@ -31,9 +32,14 @@ public class MainActivity extends Activity {
 
         information = (Button) findViewById(R.id.information);
         calendar = (Button) findViewById(R.id.myCalendar);
-
-
-
+        weather = (Button) findViewById(R.id.weather);
+        weather.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent weatherIntent = new Intent(getBaseContext(), Weather.class);
+                startActivity(weatherIntent);
+            }
+        });
         information.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,7 +50,7 @@ public class MainActivity extends Activity {
         calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent calendarIntent = new Intent(getBaseContext(), Calendar.class);
+                Intent calendarIntent = new Intent(getBaseContext(), CalendarMain.class);
                 startActivity(calendarIntent);
             }
         });

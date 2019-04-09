@@ -11,18 +11,21 @@
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@android:style/Theme.DeviceDefault.Light.DarkActionBar">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".preferences">
+        <activity android:name=".preferences"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".Information">
+        <activity android:name=".Information"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".Calendar">
+        <activity android:name=".CalendarMain">
         </activity>
     </application>
 

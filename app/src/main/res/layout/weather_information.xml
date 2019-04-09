@@ -1,0 +1,26 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@drawable/main">
+
+	<TextView
+		android:id="@+id/stardescriptions"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/starimage"
+		android:layout_centerHorizontal="true"
+		android:textColor="@color/white"
+		android:text="@string/weather"
+		android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+		android:textSize="24sp" />
+
+	<ImageView
+		android:id="@+id/starimage"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/starspinner"/>
+
+
+</RelativeLayout>
+
+

@@ -4,6 +4,15 @@
 	android:background="@drawable/main">
 
 	<Button
+		android:id="@+id/weather"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_above="@+id/myCalendar"
+		android:layout_centerHorizontal="true"
+		android:background="@drawable/button_corner"
+		android:text="@string/weather" />
+
+	<Button
 		android:id="@+id/myCalendar"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"

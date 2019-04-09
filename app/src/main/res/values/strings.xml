@@ -4,6 +4,7 @@
     <string name="menu_settings">Settings</string>
     <string name="starlist">Star List</string>
     <string name="information">Information</string>
+    <string name="weather">Weather</string>
     <string name="myCalendar">Calendar</string>
     <string name="eventinfo">Mercury is in retrograde</string>
 

@@ -2,18 +2,26 @@ package mikevriesema.ul.starcalendar;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.app.Activity;
+import android.provider.CalendarContract;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.CalendarView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
-public class Calendar extends Activity {
+public class CalendarMain extends Activity {
 
     /*/////////////////////////////////
      * ON CREATE
@@ -23,6 +31,7 @@ public class Calendar extends Activity {
     CalendarView calendar;
     TextView dateplan;
     TextView close;
+    ImageView eventImage;
     Dialog popDialog;
 
     @Override
@@ -42,27 +51,34 @@ public class Calendar extends Activity {
                 String events = "";
                 String newDate = dayOfMonth + " of " + months[month] + " " + year + "\n" + events;
                 dateplan.setText(newDate);
-
+                createEvent(dayOfMonth,month,year);
                 popUpEvent();
             }
         });
         /*
-        * Calendar cal = Calendar.getInstance();
-            Intent intent = new Intent(Intent.ACTION_EDIT);
-            intent.setType("vnd.android.cursor.item/event");
-            intent.putExtra("beginTime", cal.getTimeInMillis());
-            intent.putExtra("allDay", true);
-            intent.putExtra("rrule", "FREQ=YEARLY");
-            intent.putExtra("endTime", cal.getTimeInMillis()+60*60*1000);
-            intent.putExtra("title", "A Test Event from android app");
-            startActivity(intent);
+
          */
+    }
+    public void createEvent(int dayOfMonth,int month,int year){
+        Intent event_intent = new Intent(Intent.ACTION_INSERT);
+        event_intent.setType("vnd.android.cursor.item/event");
+        event_intent.putExtra(CalendarContract.Events.TITLE, "Mercury Retrograde"); //NEEDS TO BE MOON PHASE
+        event_intent.putExtra(CalendarContract.Events.EVENT_LOCATION, "Outside");
+
+        GregorianCalendar calDate = new GregorianCalendar(year, month, dayOfMonth);
+        event_intent.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, false);
+        event_intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,
+                calDate.getTimeInMillis());
+        event_intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME,
+                calDate.getTimeInMillis()+60*60*1000);
+        startActivity(event_intent);
     }
 
 
     public void popUpEvent(){
         popDialog.setContentView(R.layout.activity_event_info);
         close = (TextView) popDialog.findViewById(R.id.close);
+        eventImage = (ImageView) popDialog.findViewById(R.id.eventimage);
 
         close.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,7 +87,27 @@ public class Calendar extends Activity {
             }
         });
         popDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        eventImage.setImageBitmap(ImageViaAssets("event_image.png"));
         popDialog.show();
     }
 
+
+
+    public Bitmap ImageViaAssets(String fileName){
+
+        AssetManager assetmanager = getAssets();
+        InputStream is = null;
+        try{
+
+            is = assetmanager.open(fileName);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        Bitmap bitmap = BitmapFactory.decodeStream(is);
+        return bitmap;
+    }
+
 }
+
+
+
