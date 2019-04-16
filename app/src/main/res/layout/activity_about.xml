@@ -3,16 +3,57 @@
 	android:layout_height="match_parent"
 	android:background="@drawable/main">
 
+
+	<TextView
+		android:id="@+id/overlay"
+		android:text="@string/placeholder"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:gravity="center"
+		android:padding="48dp"
+		android:background="#BA525252"
+		/>
+
+	<TextView
+		android:id="@+id/titleAbout"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_centerHorizontal="true"
+		android:layout_marginTop="20dp"
+		android:text="@string/about"
+		android:textAppearance="@style/TextAppearance.AppCompat.Title"
+		android:textColor="@color/white"
+		android:textSize="26sp" />
+
 	<TextView
 		android:id="@+id/abouttext"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
+		android:layout_marginLeft="20dp"
+		android:layout_marginRight="20dp"
+		android:layout_marginTop="60dp"
 		android:layout_below="@+id/starimage"
-		android:layout_centerInParent="true"
-		android:textColor="@color/white"
-		android:text="@string/about"
+		android:layout_centerHorizontal="true"
+		android:text="@string/about1"
 		android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-		android:textSize="24sp" />
+		android:textColor="@color/white"
+		android:textSize="22sp"
+		android:typeface="serif" />
+
+	<TextView
+		android:id="@+id/abouttext2"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="20dp"
+		android:layout_marginRight="20dp"
+		android:layout_marginTop="140dp"
+		android:layout_below="@+id/abouttext"
+		android:layout_centerHorizontal="true"
+		android:text="@string/about2"
+		android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+		android:textColor="@color/white"
+		android:textSize="22sp"
+		android:typeface="serif" />
 </RelativeLayout>
 
 

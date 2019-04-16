@@ -9,9 +9,16 @@
     <string name="compass">Compass</string>
     <string name="myCalendar">Calendar</string>
     <string name="eventinfo">Mercury is in retrograde</string>
-
-
-    <string name="about">This app is designed to help you observe the night sky,currently with emphasis on the moon phases. There are options to view the weather in your location to plan before going stargazing aswell as a compass to get your orientation right. The handy calendar can help pencil events in the sky that you do not want to miss! Information is filled with some facts about the various things you might find in our sky.</string>
+    <string name="placeholder"> </string>
+    <string name="about">About</string>
+    <string name="about1">
+        This app is designed to help you observe the night sky,currently with emphasis on the moon phases.\n\n
+        There are options to view the weather in your location to plan before going stargazing aswell as a compass to get your orientation right.\n\n
+    </string>
+    <string name="about2">
+        The handy calendar can help pencil events in the sky that you do not want to miss!\n\n
+        Information is filled with some facts about the various things you might find in our sky.\n\n
+    </string>
     <string name="error_one">No entry found</string>
     <string name="close">X</string>
 
