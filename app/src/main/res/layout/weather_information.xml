@@ -4,15 +4,15 @@
 	android:background="@drawable/main">
 
 	<TextView
-		android:id="@+id/stardescriptions"
+		android:id="@+id/title"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_below="@+id/starimage"
 		android:layout_centerHorizontal="true"
-		android:textColor="@color/white"
+		android:layout_marginTop="50dp"
 		android:text="@string/weather"
-		android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-		android:textSize="24sp" />
+		android:textAppearance="@style/TextAppearance.AppCompat.Title"
+		android:textColor="@color/white"
+		android:textSize="40sp" />
 
 	<ImageView
 		android:id="@+id/starimage"

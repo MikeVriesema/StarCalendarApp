@@ -16,15 +16,23 @@ import android.widget.TextView;
         ImageView image;
         float currentDegree = 0f;
         SensorManager sensorMan;
-        TextView tvHeading;
+        TextView bearing;
 
+
+
+        /*
+         * SOURCES:
+         *  Compass sensor calculations + rotation animation = https://www.javacodegeeks.com/2013/09/android-compass-code-example.html
+         *  Large part fo sensor information was taken from the free falling lab also as I did not want to use implements listener but rather
+         *  the anonymous subclass what we had learned previously.
+         */
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.compass_information);
 
             image = (ImageView) findViewById(R.id.imageViewCompass);
-            tvHeading = (TextView) findViewById(R.id.bearing);
+            bearing = (TextView) findViewById(R.id.bearing);
             sensorMan = (SensorManager) getSystemService(SENSOR_SERVICE);
         }
 
@@ -52,7 +60,7 @@ import android.widget.TextView;
             public void onSensorChanged(SensorEvent event) {
 
                 float degree = Math.round(event.values[0]);
-                tvHeading.setText("Heading: " + Float.toString(degree) + " degrees");
+                bearing.setText("Heading: " + Float.toString(degree) + " degrees");
 
                 RotateAnimation rotationAn = new RotateAnimation(
                         currentDegree,
