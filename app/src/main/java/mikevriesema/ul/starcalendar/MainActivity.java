@@ -21,11 +21,13 @@ public class MainActivity extends Activity {
     Button information;
     Button calendar;
     Button weather;
+    Button compass;
 
-    /*/////////////////////////////////
-     * ON CREATE
+    /*
+     * SOURCES:
+     * Toolbar back button: https://stackoverflow.com/questions/34110565/how-to-add-back-button-on-actionbar-in-android-studio
      *
-     */////////////////////////////////
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +36,7 @@ public class MainActivity extends Activity {
         information = (Button) findViewById(R.id.information);
         calendar = (Button) findViewById(R.id.myCalendar);
         weather = (Button) findViewById(R.id.weather);
+        compass = (Button) findViewById(R.id.compass);
         ActionBar actionBar = getActionBar();
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -43,6 +46,13 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 Intent weatherIntent = new Intent(getBaseContext(), Weather.class);
                 startActivity(weatherIntent);
+            }
+        });
+        compass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent compassIntent = new Intent(getBaseContext(), Compass.class);
+                startActivity(compassIntent);
             }
         });
         information.setOnClickListener(new View.OnClickListener() {
@@ -63,11 +73,6 @@ public class MainActivity extends Activity {
     }
 
 
-
-    /*/////////////////////////////////
-     * MENU
-     *
-     */////////////////////////////////
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
@@ -88,7 +93,7 @@ public class MainActivity extends Activity {
                 break;
             }
             case android.R.id.home:
-                // app icon in action bar clicked; go home
+                //app icon in action bar clicked; go to homepage
                 Intent intent = new Intent(this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);

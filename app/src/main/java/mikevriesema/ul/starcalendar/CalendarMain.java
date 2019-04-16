@@ -35,6 +35,11 @@ public class CalendarMain extends MainActivity {
     ImageView eventImage;
     Dialog popDialog;
 
+
+    /*
+     * SOURCES:
+     *  Information on calendar intents : https://stackoverflow.com/questions/3721963/how-to-add-calendar-events-in-android
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
