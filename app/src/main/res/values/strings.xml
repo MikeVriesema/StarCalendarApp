@@ -10,6 +10,12 @@
     <string name="myCalendar">Calendar</string>
     <string name="eventinfo">Mercury is in retrograde</string>
     <string name="placeholder"> </string>
+
+    <string name="subject">Object:</string>
+    <string name="mass">Mass:</string>
+    <string name="diametersize">Diameter:</string>
+    <string name="gravity">Gravity:</string>
+
     <string name="about">About</string>
     <string name="about1">
         This app is designed to help you observe the night sky,currently with emphasis on the moon phases.\n\n

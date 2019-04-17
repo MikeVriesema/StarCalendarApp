@@ -9,12 +9,18 @@ package mikevriesema.ul.starcalendar;
 
 import android.app.ActionBar;
 import android.content.Intent;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+
+import java.io.IOException;
+import java.io.InputStream;
 
 public class MainActivity extends Activity {
 
@@ -102,7 +108,19 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    public Bitmap ImageViaAssets(String fileName){
 
+        AssetManager assetmanager = getAssets();
+        InputStream is = null;
+        try{
+
+            is = assetmanager.open(fileName);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        Bitmap bitmap = BitmapFactory.decodeStream(is);
+        return bitmap;
+    }
 
 
 

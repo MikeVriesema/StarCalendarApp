@@ -148,6 +148,7 @@ public class StarsDB {
     public String[] getStarNames() {
 
         ArrayList<String> outputArray = new ArrayList<String>();
+        outputArray.add("-");
         String[] result_columns = new String[]{
                 KEY_STAR_NAME};
 

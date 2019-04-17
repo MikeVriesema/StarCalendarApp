@@ -1,6 +1,5 @@
 package mikevriesema.ul.starcalendar;
 
-import android.app.ActionBar;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.res.AssetManager;
@@ -9,7 +8,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.app.Activity;
 import android.provider.CalendarContract;
 import android.support.annotation.NonNull;
 import android.view.View;
@@ -19,7 +17,6 @@ import android.widget.TextView;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class CalendarMain extends MainActivity {
@@ -95,23 +92,6 @@ public class CalendarMain extends MainActivity {
         eventImage.setImageBitmap(ImageViaAssets("event_image.png"));
         popDialog.show();
     }
-
-
-
-    public Bitmap ImageViaAssets(String fileName){
-
-        AssetManager assetmanager = getAssets();
-        InputStream is = null;
-        try{
-
-            is = assetmanager.open(fileName);
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-        Bitmap bitmap = BitmapFactory.decodeStream(is);
-        return bitmap;
-    }
-
 }
 
 
