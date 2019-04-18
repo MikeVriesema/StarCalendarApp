@@ -22,7 +22,7 @@ public class StarsDB {
     public static final String KEY_ID = "_id";
     public static final String KEY_STAR_NAME = "star_name";
     public static final String KEY_STAR_MASS = "star_mass";
-    public static final String KEY_STAR_DIMENSIONS = "star_dim";
+    public static final String KEY_STAR_DIMENSION = "star_dim";
     public static final String KEY_STAR_DESCRIPTION = "star_description";
 
     private Context context;
@@ -79,7 +79,7 @@ public class StarsDB {
         // Assign values for each row.
         newValues.put(KEY_STAR_NAME, starName);
         newValues.put(KEY_STAR_MASS, starMass);
-        newValues.put(KEY_STAR_DIMENSIONS, starDim);
+        newValues.put(KEY_STAR_DIMENSION, starDim);
         newValues.put(KEY_STAR_DESCRIPTION, starDescription);
 
         // Insert the row into your table
@@ -119,7 +119,7 @@ public class StarsDB {
     public String[] getAll() {
 
         ArrayList<String> outputArray = new ArrayList<String>();
-        String[] result_columns = new String[]{KEY_STAR_NAME,KEY_STAR_MASS,KEY_STAR_DIMENSIONS,KEY_STAR_DESCRIPTION};
+        String[] result_columns = new String[]{KEY_STAR_NAME,KEY_STAR_MASS,KEY_STAR_DIMENSION,KEY_STAR_DESCRIPTION};
 
         String starName;
         String starMass;
@@ -139,7 +139,7 @@ public class StarsDB {
         while (result) {
             starName = cursor.getString(cursor.getColumnIndex(KEY_STAR_NAME));
             starMass = cursor.getString(cursor.getColumnIndex(KEY_STAR_MASS));
-            starDimension = cursor.getString(cursor.getColumnIndex(KEY_STAR_DIMENSIONS));
+            starDimension = cursor.getString(cursor.getColumnIndex(KEY_STAR_DIMENSION));
             starDescription = cursor.getString(cursor.getColumnIndex(KEY_STAR_DESCRIPTION));
             outputArray.add(starName + "\n" +  starMass + "\n" + starDimension + "\n" +  starDescription);
             result = cursor.moveToNext();
@@ -182,7 +182,7 @@ public class StarsDB {
 
 
     /*
-     * Obtain all star mass from the database and return in String
+     * Obtain all star descriptions from the database and return in String
      */
     public String getStarMass(String starName) {
 
@@ -190,7 +190,7 @@ public class StarsDB {
                 KEY_ID, KEY_STAR_MASS};
 
         //String starMass;
-        String where = KEY_STAR_NAME + "= ?";
+        String where = KEY_STAR_NAME + " = ?";
         String whereArgs[] = {starName};
         String groupBy = null;
         String having = null;
@@ -201,8 +201,7 @@ public class StarsDB {
                 result_columns, where,
                 whereArgs, groupBy, having, order);
         if (cursor.moveToFirst()) {
-            int index = cursor.getColumnIndex(KEY_STAR_MASS);
-            return cursor.getString(index);
+            return cursor.getString(cursor.getColumnIndex(KEY_STAR_MASS));
         } else return context.getString(R.string.error_one);
     }
 
@@ -211,10 +210,10 @@ public class StarsDB {
      */
     public String getStarDimensions(String starName) {
         String[] result_columns = new String[]{
-                KEY_ID, KEY_STAR_DIMENSIONS};
+                KEY_ID, KEY_STAR_DIMENSION};
 
-        //String starDimension;
-        String where = KEY_STAR_NAME + "= ?";
+        //String starDimensions;
+        String where = KEY_STAR_NAME + " = ?";
         String whereArgs[] = {starName};
         String groupBy = null;
         String having = null;
@@ -225,10 +224,10 @@ public class StarsDB {
                 result_columns, where,
                 whereArgs, groupBy, having, order);
         if (cursor.moveToFirst()) {
-            int index = cursor.getColumnIndex(KEY_STAR_DIMENSIONS);
-            return cursor.getString(index);
+            return cursor.getString(cursor.getColumnIndex(KEY_STAR_DIMENSION));
         } else return context.getString(R.string.error_one);
     }
+
     /*
      * Obtain all star descriptions from the database and return in String
      */
@@ -237,8 +236,8 @@ public class StarsDB {
         String[] result_columns = new String[]{
                 KEY_ID, KEY_STAR_DESCRIPTION};
 
-        String starDescription;
-        String where = KEY_STAR_NAME + "= ?";
+        //String starDescription;
+        String where = KEY_STAR_NAME + " = ?";
         String whereArgs[] = {starName};
         String groupBy = null;
         String having = null;
@@ -249,8 +248,7 @@ public class StarsDB {
                 result_columns, where,
                 whereArgs, groupBy, having, order);
         if (cursor.moveToFirst()) {
-            int index = cursor.getColumnIndex(KEY_STAR_DESCRIPTION);
-            return cursor.getString(index);
+            return cursor.getString(cursor.getColumnIndex(KEY_STAR_DESCRIPTION));
         } else return context.getString(R.string.error_one);
     }
 
@@ -264,18 +262,18 @@ public class StarsDB {
      */
     private static class ModuleDBOpenHelper extends SQLiteOpenHelper {
 
-        private static final String DATABASE_NAME = "myDatabase.db";
+        private static final String DATABASE_NAME = "StarCalendar.db";
         private static final String DATABASE_TABLE = "Stars";
         private static final int DATABASE_VERSION = 1;
 
         // SQL Statement to create a new database.
-        private static final String DATABASE_CREATE = "create table " +
+        private static final String DATABASE_CREATE = "CREATE TABLE " +
                 DATABASE_TABLE + " (" +
-                KEY_ID + " integer primary key autoincrement, " +
-                KEY_STAR_NAME + " text not null, " +
-                KEY_STAR_MASS + " text not null, " +
-                KEY_STAR_DIMENSIONS + " text not null, " +
-                KEY_STAR_DESCRIPTION + " text not null);";
+                KEY_ID + " integer PRIMARY KEY AUTOINCREMENT, " +
+                KEY_STAR_NAME + " text NOT NULL, " +
+                KEY_STAR_MASS + " text, " +
+                KEY_STAR_DIMENSION + " text, " +
+                KEY_STAR_DESCRIPTION + " text); ";
 
 
         public ModuleDBOpenHelper(Context context, String name,

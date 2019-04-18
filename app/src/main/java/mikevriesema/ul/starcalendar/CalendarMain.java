@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.support.annotation.NonNull;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,8 +31,11 @@ public class CalendarMain extends MainActivity {
     TextView dateplan;
     TextView close;
     ImageView eventImage;
+    Button confirm;
     Dialog popDialog;
-
+    public int day_value;
+    public int month_value;
+    public int year_value;
 
     /*
      * SOURCES:
@@ -53,7 +57,9 @@ public class CalendarMain extends MainActivity {
                 String events = "";
                 String newDate = dayOfMonth + " of " + months[month] + " " + year + "\n" + events;
                 dateplan.setText(newDate);
-                createEvent(dayOfMonth,month,year);
+                day_value = dayOfMonth;
+                month_value = month;
+                year_value = year;
                 popUpEvent();
             }
         });
@@ -81,7 +87,13 @@ public class CalendarMain extends MainActivity {
         popDialog.setContentView(R.layout.activity_event_info);
         close = (TextView) popDialog.findViewById(R.id.close);
         eventImage = (ImageView) popDialog.findViewById(R.id.eventimage);
-
+        confirm = (Button) popDialog.findViewById(R.id.confirm);
+        confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createEvent(day_value,month_value,year_value);
+            }
+        });
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">StarCalendar</string>
     <string name="user">User</string>
-    <string name="menu_settings">Settings</string>
-    <string name="menu_help">Help</string>
+    <string name="menu_settings">Username</string>
+    <string name="menu_help">About</string>
     <string name="starlist">Star List</string>
     <string name="information">Information</string>
     <string name="weather">Weather</string>
@@ -10,20 +10,16 @@
     <string name="myCalendar">Calendar</string>
     <string name="eventinfo">Mercury is in retrograde</string>
     <string name="placeholder"> </string>
-
+    <string name="confirm_add">Add Event to Calendar</string>
     <string name="subject">Object:</string>
     <string name="mass">Mass:</string>
-    <string name="diametersize">Dimensions:</string>
+    <string name="diametersize">Size:</string>
     <string name="gravity">Gravity:</string>
 
     <string name="about">About</string>
-    <string name="about1">
-        This app is designed to help you observe the night sky,currently with emphasis on the moon phases.\n\n
-        There are options to view the weather in your location to plan before going stargazing aswell as a compass to get your orientation right.\n\n
+    <string name="about1">This app is designed to help you observe the night sky,currently with emphasis on the moon phases.\n\nThere are options to view the weather in your location to plan before going stargazing aswell as a compass to get your orientation right.\n
     </string>
-    <string name="about2">
-        The handy calendar can help pencil events in the sky that you do not want to miss!\n\n
-        Information is filled with some facts about the various things you might find in our sky.\n\n
+    <string name="about2">The handy calendar can help pencil events in the sky that you do not want to miss!\n\nInformation is filled with some facts about the various things you might find in our sky.\n
     </string>
     <string name="error_one">No entry found</string>
     <string name="close">X</string>

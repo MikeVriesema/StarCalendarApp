@@ -19,7 +19,6 @@ public class Information extends MainActivity {
     Spinner starSpinner;
     String[] starNames;
     TextView databaseView;
-    TextView stardescriptions;
     TextView objectInfo;
     TextView massInfo;
     TextView dimensionInfo;
@@ -40,7 +39,6 @@ public class Information extends MainActivity {
 
         starSpinner = (Spinner) findViewById(R.id.starspinner);
         databaseView = (TextView) findViewById(R.id.databasevalues);
-        stardescriptions = (TextView) findViewById(R.id.stardescriptions);
         starImage = (ImageView) findViewById(R.id.starimage);
         starDB = new StarsDB(getApplicationContext());
         infoPopup = new Dialog(this);
@@ -53,6 +51,10 @@ public class Information extends MainActivity {
 
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                String[] values = starDB.getAll();
+                for(int i = 0;i<values.length;i++){
+                    System.out.println(values[i]);
+                }
                 if (starNames.length>position && position != 0) {
                     popUpObject(starNames[position]);
                 }
@@ -79,7 +81,6 @@ public class Information extends MainActivity {
         objectInfo.setText(objectName);
         dimensionInfo.setText(starDB.getStarDimensions((objectName)));
         massInfo.setText(starDB.getStarMass((objectName)));
-        //massInfo.setText(starDB.getStarDescriptions((objectName)));
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
