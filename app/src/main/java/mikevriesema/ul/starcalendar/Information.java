@@ -21,6 +21,8 @@ public class Information extends MainActivity {
     TextView databaseView;
     TextView stardescriptions;
     TextView objectInfo;
+    TextView massInfo;
+    TextView dimensionInfo;
     TextView close;
     ImageView objectimage;
     ImageView starImage;
@@ -52,7 +54,6 @@ public class Information extends MainActivity {
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 if (starNames.length>position && position != 0) {
-                    //stardescriptions.setText(starDB.getStarDescriptions((starNames[position])));
                     popUpObject(starNames[position]);
                 }
             }
@@ -69,11 +70,16 @@ public class Information extends MainActivity {
     public void popUpObject(String objectName){
         infoPopup.setContentView(R.layout.activty_information_popup);
         close = (TextView) infoPopup.findViewById(R.id.close);
-
-        //objectimage = (ImageView) infoPopup.findViewById(R.id.objectimage);
+        objectimage = (ImageView) infoPopup.findViewById(R.id.objectimage);
         objectInfo = (TextView) infoPopup.findViewById(R.id.objectInfo);
+        massInfo = (TextView) infoPopup.findViewById(R.id.massInfo);
+        dimensionInfo = (TextView) infoPopup.findViewById(R.id.dimensionInfo);
+
 
         objectInfo.setText(objectName);
+        dimensionInfo.setText(starDB.getStarDimensions((objectName)));
+        massInfo.setText(starDB.getStarMass((objectName)));
+        //massInfo.setText(starDB.getStarDescriptions((objectName)));
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,7 +87,7 @@ public class Information extends MainActivity {
             }
         });
         infoPopup.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        //objectimage.setImageBitmap(ImageViaAssets(objectName+".png"));
+        objectimage.setImageBitmap(ImageViaAssets(objectName+".png"));
         infoPopup.show();
     }
 }

@@ -13,7 +13,7 @@
 
     <string name="subject">Object:</string>
     <string name="mass">Mass:</string>
-    <string name="diametersize">Diameter:</string>
+    <string name="diametersize">Dimensions:</string>
     <string name="gravity">Gravity:</string>
 
     <string name="about">About</string>
@@ -29,8 +29,7 @@
     <string name="close">X</string>
 
 
-
-    <string-array name="space_array">
+    <string-array name="spaceplan_array">
         <item>Mercury</item>
         <item>Venus</item>
         <item>Earth</item>
@@ -40,6 +39,54 @@
         <item>ISS</item>
         <item>Spacecraft</item>
         <item>Meteor</item>
+    </string-array>
+
+    <string-array name="spacemass_array">
+        <item>3.29 × 10^23 kg</item>
+        <item>4.87 × 10^24 kg</item>
+        <item>5.97 × 10^24 kg</item>
+        <item>6.39 × 10^23 kg</item>
+        <item>7.35 × 10^22 kg</item>
+        <item>1.99 × 10^30 kg</item>
+        <item>417,289 kg</item>
+        <item>2,030,000 kg</item>
+        <item>(max) 54431 kg</item>
+    </string-array>
+
+    <string-array name="spacedim_array">
+        <item>4,879 km in Diameter</item>
+        <item>12,104 km in Diameter</item>
+        <item>12,742 km in Diameter</item>
+        <item>6,779 km in Diameter</item>
+        <item>3,474 km in Diameter</item>
+        <item>1.391 million km in Diameter</item>
+        <item>108.5 meters by 72.8 meters</item>
+        <item>8.7 m in Diameter</item>
+        <item>0.003 km in Diameter</item>
+    </string-array>
+
+    <string-array name="spacegrav_array">
+        <item>Mercury</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+        <item>Moon</item>
+        <item>Sun</item>
+        <item>ISS</item>
+        <item>Spacecraft</item>
+        <item>Meteor</item>
+    </string-array>
+
+    <string-array name="spacedesc_array">
+        <item>A year on Mercury is just 88 days long. It is also the smallest planet.</item>
+        <item>Venus is the second brightest natural object in the sky. One day on Venus is longer than one year.</item>
+        <item>It\'s home</item>
+        <item>Mars is the fourth planet from the Sun and is the second smallest planet in the solar system. </item>
+        <item>The Moon of the Earth. Does one full revolution of the Earth every 24 Hours</item>
+        <item>The Sun accounts for 99.86% of the mass in the solar system. Over one million Earth\'s could fit inside the Sun.</item>
+        <item>The space station has been continuously occupied since November 2000. It travels at a speed of five miles per second, orbiting Earth about every 90 minutes.</item>
+        <item>The position of the Voyager 1 spacecraft is some 12.5 billion miles away.</item>
+        <item>A meteoroid is a small rock or particle of debris in our solar system.The Geminids spray up to 40 meteors per hour at its peak.</item>
     </string-array>
 
     <string-array name="months">
@@ -55,18 +102,6 @@
         <item>October</item>
         <item>November</item>
         <item>December</item>
-    </string-array>
-
-    <string-array name="spacedesc_array">
-        <item>A year on Mercury is just 88 days long. It is also the smallest planet.</item>
-        <item>Venus is the second brightest natural object in the sky. One day on Venus is longer than one year.</item>
-        <item>It\'s home</item>
-        <item>Mars is the fourth planet from the Sun and is the second smallest planet in the solar system. </item>
-        <item>The Moon of the Earth. Does one full revolution of the Earth every 24 Hours</item>
-        <item>The Sun accounts for 99.86% of the mass in the solar system. Over one million Earth\'s could fit inside the Sun.</item>
-        <item>The space station has been continuously occupied since November 2000. It travels at a speed of five miles per second, orbiting Earth about every 90 minutes.</item>
-        <item>The position of the Voyager 1 spacecraft is some 12.5 billion miles away.</item>
-        <item>A meteoroid is a small rock or particle of debris in our solar system.The Geminids spray up to 40 meteors per hour at its peak.</item>
     </string-array>
 
 </resources>
