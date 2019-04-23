@@ -3,6 +3,7 @@ package mikevriesema.ul.starcalendar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
+import android.location.LocationListener;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
@@ -30,6 +31,8 @@ public class Weather extends MainActivity {
     Typeface weatherFont;
     String city = "Dublin, IE";
     String OPEN_WEATHER_MAP_API = "27bba67d4f9f2258695c40a1e74c16da";
+    double lat,lon;
+    String url;
 
 
     @Override
@@ -92,6 +95,8 @@ public class Weather extends MainActivity {
         }
     }
 
+
+
     class DownloadWeather extends AsyncTask < String, Void, String > {
         @Override
         protected void onPreExecute() {
@@ -100,14 +105,23 @@ public class Weather extends MainActivity {
 
         }
         protected String doInBackground(String...args) {
-            String xml = FetchWeather.excuteGet("http://api.openweathermap.org/data/2.5/weather?q=" + args[0] +
-                    "&units=metric&appid=" + OPEN_WEATHER_MAP_API);
+            LocationService location = new LocationService();
+            location.getLocationService();
+            lat = location.getLatitude();
+            lon = location.getLongitude();
+            if(lat == 0.0 && lon == 0.0){
+                url = String.format("api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&units=metric&appid="+OPEN_WEATHER_MAP_API,lat,lon);
+            }else{
+                url = "http://api.openweathermap.org/data/2.5/weather?q=" + args[0] + "&units=metric&appid=" + OPEN_WEATHER_MAP_API;
+            }
+            String xml = FetchWeather.excuteGet(url);
             return xml;
         }
         @Override
         protected void onPostExecute(String xml) {
             try {
                 JSONObject json = new JSONObject(xml);
+
                 if (json != null) {
                     JSONObject details = json.getJSONArray("weather").getJSONObject(0);
                     JSONObject main = json.getJSONObject("main");
