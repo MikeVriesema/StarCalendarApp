@@ -105,10 +105,40 @@ public class Weather extends MainActivity {
 
         }
         protected String doInBackground(String...args) {
-            LocationService location = new LocationService();
-            location.getLocationService();
-            lat = location.getLatitude();
-            lon = location.getLongitude();
+            GPSTracker gpsTracker = new GPSTracker(this);
+            if (gpsTracker.getIsGPSTrackingEnabled())
+            {
+                String stringLatitude = String.valueOf(gpsTracker.latitude);
+                textview = (TextView)findViewById(R.id.fieldLatitude);
+                textview.setText(stringLatitude);
+
+                String stringLongitude = String.valueOf(gpsTracker.longitude);
+                textview = (TextView)findViewById(R.id.fieldLongitude);
+                textview.setText(stringLongitude);
+
+                String country = gpsTracker.getCountryName(this);
+                textview = (TextView)findViewById(R.id.fieldCountry);
+                textview.setText(country);
+
+                String city = gpsTracker.getLocality(this);
+                textview = (TextView)findViewById(R.id.fieldCity);
+                textview.setText(city);
+
+                String postalCode = gpsTracker.getPostalCode(this);
+                textview = (TextView)findViewById(R.id.fieldPostalCode);
+                textview.setText(postalCode);
+
+                String addressLine = gpsTracker.getAddressLine(this);
+                textview = (TextView)findViewById(R.id.fieldAddressLine);
+                textview.setText(addressLine);
+            }
+            else
+            {
+                // can't get location
+                // GPS or Network is not enabled
+                // Ask user to enable GPS/network in settings
+                gpsTracker.showSettingsAlert();
+            }
             if(lat == 0.0 && lon == 0.0){
                 url = String.format("api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&units=metric&appid="+OPEN_WEATHER_MAP_API,lat,lon);
             }else{
