@@ -26,8 +26,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -38,6 +36,7 @@ public class MainActivity extends Activity {
     Button weather;
     Button compass;
     TextView name_view;
+    SharedPreferences myPrefs;
     SharedPreferences.OnSharedPreferenceChangeListener prefListener;
 
     /*
@@ -49,11 +48,6 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if ( ContextCompat.checkSelfPermission( this, android.Manifest.permission.ACCESS_COARSE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
-
-            ActivityCompat.requestPermissions( this, new String[] {  android.Manifest.permission.ACCESS_COARSE_LOCATION  },1);
-        }
-
         information = (Button) findViewById(R.id.information);
         calendar = (Button) findViewById(R.id.myCalendar);
         weather = (Button) findViewById(R.id.weather);
@@ -93,7 +87,7 @@ public class MainActivity extends Activity {
         });
 
 
-        SharedPreferences myPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        myPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         updateUIFromPreferences(myPrefs);
         prefListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
@@ -154,5 +148,9 @@ public class MainActivity extends Activity {
         if (!name.contentEquals("")) {
             name_view.setText(name+"'s");
         }
+    }
+
+    public void SavePreferences(SharedPreferences prefs){
+
     }
 }
