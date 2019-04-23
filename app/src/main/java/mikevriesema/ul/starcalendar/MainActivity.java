@@ -10,18 +10,23 @@ package mikevriesema.ul.starcalendar;
 import android.Manifest;
 import android.app.ActionBar;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.app.Activity;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,6 +37,8 @@ public class MainActivity extends Activity {
     Button calendar;
     Button weather;
     Button compass;
+    TextView name_view;
+    SharedPreferences.OnSharedPreferenceChangeListener prefListener;
 
     /*
      * SOURCES:
@@ -51,6 +58,7 @@ public class MainActivity extends Activity {
         calendar = (Button) findViewById(R.id.myCalendar);
         weather = (Button) findViewById(R.id.weather);
         compass = (Button) findViewById(R.id.compass);
+        name_view = (TextView) findViewById(R.id.name);
         ActionBar actionBar = getActionBar();
         actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -83,6 +91,17 @@ public class MainActivity extends Activity {
                 startActivity(calendarIntent);
             }
         });
+
+
+        SharedPreferences myPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        updateUIFromPreferences(myPrefs);
+        prefListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+            public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+                updateUIFromPreferences(prefs);
+            }
+        };
+        myPrefs.registerOnSharedPreferenceChangeListener(prefListener);
+
 
     }
 
@@ -130,9 +149,10 @@ public class MainActivity extends Activity {
         return bitmap;
     }
 
-
-
-
-
-
+    private void updateUIFromPreferences(SharedPreferences prefs) {
+        String name = prefs.getString(preferences.KEY_USER,"");
+        if (!name.contentEquals("")) {
+            name_view.setText(name+"'s");
+        }
+    }
 }

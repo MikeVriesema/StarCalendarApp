@@ -24,7 +24,6 @@ public class Weather extends MainActivity {
     /*
      * SOURCE:
      * Weather info and remote fetch = https://androstock.com/tutorials/create-a-weather-app-on-android-android-studio.html
-     *
      */
     TextView selectCity, cityField, detailsField, currentTemperatureField, humidity_field, pressure_field, weatherIcon, updatedField;
     ProgressBar loader;
@@ -34,12 +33,10 @@ public class Weather extends MainActivity {
     double lat,lon;
     String url;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.weather_information);
-
         loader = (ProgressBar) findViewById(R.id.loader);
         selectCity = (TextView) findViewById(R.id.selectCity);
         cityField = (TextView) findViewById(R.id.city_field);
@@ -51,7 +48,6 @@ public class Weather extends MainActivity {
         weatherIcon = (TextView) findViewById(R.id.weather_icon);
         weatherFont = Typeface.createFromAsset(getAssets(), "fonts/weather_icons.ttf");
         weatherIcon.setTypeface(weatherFont);
-
         taskLoadUp(city);
 
         selectCity.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +62,6 @@ public class Weather extends MainActivity {
                         LinearLayout.LayoutParams.MATCH_PARENT);
                 input.setLayoutParams(lp);
                 alertDialog.setView(input);
-
                 alertDialog.setPositiveButton("Change",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
@@ -85,6 +80,11 @@ public class Weather extends MainActivity {
         });
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        taskLoadUp(city);
+    }
 
     public void taskLoadUp(String query) {
         if (FetchWeather.isNetworkAvailable(getApplicationContext())) {
@@ -96,7 +96,6 @@ public class Weather extends MainActivity {
     }
 
 
-
     class DownloadWeather extends AsyncTask < String, Void, String > {
         @Override
         protected void onPreExecute() {
@@ -105,28 +104,8 @@ public class Weather extends MainActivity {
 
         }
         protected String doInBackground(String...args) {
-            LocationService position = new LocationService(getApplicationContext());
-            if (position.getIsGPSTrackingEnabled())
-            {
-                lat = position.getLatitude();
-                lon = position.getLongitude();
-                System.out.println(lat + " YUPP");
-                System.out.println(lon + " YUPP");
-            }
-            else
-            {
-                // can't get location
-                // GPS or Network is not enabled
-                // Ask user to enable GPS/network in settings
-                //USE CITY
-                System.out.println(" NAH");
-            }
-            if(lat != 0.0 && lon != 0.0){
-                url = String.format("api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&units=metric&appid="+OPEN_WEATHER_MAP_API,lat,lon);
-            }else{
-                url = "http://api.openweathermap.org/data/2.5/weather?q=" + args[0] + "&units=metric&appid=" + OPEN_WEATHER_MAP_API;
-            }
-            System.out.println(url);
+            //url = String.format("api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&units=metric&appid="+OPEN_WEATHER_MAP_API,lat,lon);
+            url = "http://api.openweathermap.org/data/2.5/weather?q=" + args[0] + "&units=metric&appid=" + OPEN_WEATHER_MAP_API;
             String xml = FetchWeather.excuteGet(url);
             return xml;
         }
@@ -134,7 +113,6 @@ public class Weather extends MainActivity {
         protected void onPostExecute(String xml) {
             try {
                 JSONObject json = new JSONObject(xml);
-                System.out.println(xml);
                 if (json != null) {
                     JSONObject details = json.getJSONArray("weather").getJSONObject(0);
                     JSONObject main = json.getJSONObject("main");
