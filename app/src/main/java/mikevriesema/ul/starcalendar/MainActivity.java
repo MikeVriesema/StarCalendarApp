@@ -44,8 +44,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         if ( ContextCompat.checkSelfPermission( this, android.Manifest.permission.ACCESS_COARSE_LOCATION ) != PackageManager.PERMISSION_GRANTED ) {
 
-            ActivityCompat.requestPermissions( this, new String[] {  android.Manifest.permission.ACCESS_COARSE_LOCATION  },
-                    LocationService.MY_PERMISSION_ACCESS_LOCATION );
+            ActivityCompat.requestPermissions( this, new String[] {  android.Manifest.permission.ACCESS_COARSE_LOCATION  },1);
         }
 
         information = (Button) findViewById(R.id.information);
