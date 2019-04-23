@@ -6,6 +6,7 @@ import android.preference.PreferenceActivity;
 public class preferences extends PreferenceActivity {
 
     public final static String KEY_USER = "KEY_USER";
+    public final static String KEY_CITY = "KEY_CITY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

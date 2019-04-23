@@ -15,6 +15,7 @@
     <string name="mass">Mass:</string>
     <string name="diametersize">Size:</string>
     <string name="gravity">Gravity:</string>
+    <string name="change_city">Change City</string>
 
     <string name="about">About</string>
     <string name="about1">This app is designed to help you observe the night sky,currently with emphasis on the moon phases.\n\nThere are options to view the weather in your location to plan before going stargazing aswell as a compass to get your orientation right.\n
