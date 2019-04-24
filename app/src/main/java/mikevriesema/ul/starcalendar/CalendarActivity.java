@@ -21,7 +21,7 @@ import android.widget.TextView;
 
 import java.util.GregorianCalendar;
 
-public class CalendarMain extends MainActivity {
+public class CalendarActivity extends MainActivity {
 
     /*/////////////////////////////////
      * ON CREATE
@@ -40,7 +40,7 @@ public class CalendarMain extends MainActivity {
 
     /*
      * SOURCES:
-     *  Information on calendar intents : https://stackoverflow.com/questions/3721963/how-to-add-calendar-events-in-android
+     *  InformationActivity on calendar intents : https://stackoverflow.com/questions/3721963/how-to-add-calendar-events-in-android
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

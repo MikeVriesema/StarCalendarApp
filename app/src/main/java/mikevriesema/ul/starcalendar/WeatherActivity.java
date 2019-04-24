@@ -27,11 +27,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class Weather extends MainActivity {
+public class WeatherActivity extends MainActivity {
 
     /*
      * SOURCE:
-     * Weather info and remote fetch = https://androstock.com/tutorials/create-a-weather-app-on-android-android-studio.html
+     * WeatherActivity info and remote fetch = https://androstock.com/tutorials/create-a-weather-app-on-android-android-studio.html
      */
     TextView selectCity, cityField, detailsField, currentTemperatureField, humidity_field, pressure_field, weatherIcon, updatedField, pos,  wind_speed, sunrise , sunset;
     ProgressBar loader;
@@ -59,15 +59,15 @@ public class Weather extends MainActivity {
         weatherFont = Typeface.createFromAsset(getAssets(), "fonts/weather_icons.ttf");
         weatherIcon.setTypeface(weatherFont);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        city = prefs.getString(preferences.KEY_CITY,getString(R.string.city_default));
+        city = prefs.getString(PreferenceActivity.KEY_CITY,getString(R.string.city_default));
         taskLoadUp(city);
 
         selectCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(Weather.this);
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(WeatherActivity.this);
                 alertDialog.setTitle("Change City");
-                final EditText input = new EditText(Weather.this);
+                final EditText input = new EditText(WeatherActivity.this);
                 input.setText(city);
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
@@ -80,7 +80,7 @@ public class Weather extends MainActivity {
                                 city = input.getText().toString();
                                 SharedPreferences.Editor edit;
                                 edit = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
-                                edit.putString(preferences.KEY_CITY,city);
+                                edit.putString(PreferenceActivity.KEY_CITY,city);
                                 edit.apply();
                                 taskLoadUp(city);
                             }

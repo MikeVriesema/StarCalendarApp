@@ -19,7 +19,7 @@ public class FetchWeather {
 
     /*
      * SOURCE:
-     * Weather info and fetch weather = https://androstock.com/tutorials/create-a-weather-app-on-android-android-studio.html
+     * WeatherActivity info and fetch weather = https://androstock.com/tutorials/create-a-weather-app-on-android-android-studio.html
      */
 
     public static boolean isNetworkAvailable(Context context)

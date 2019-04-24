@@ -16,7 +16,7 @@ import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-    public class Compass extends MainActivity {
+    public class CompassActivity extends MainActivity {
 
         ImageView image;
         float currentDegree = 0f;
@@ -27,7 +27,7 @@ import android.widget.TextView;
 
         /*
          * SOURCES:
-         *  Compass sensor calculations + rotation animation = https://www.javacodegeeks.com/2013/09/android-compass-code-example.html
+         *  CompassActivity sensor calculations + rotation animation = https://www.javacodegeeks.com/2013/09/android-compass-code-example.html
          *  Large part fo sensor information was taken from the free falling lab also as I did not want to use implements listener but rather
          *  the anonymous subclass what we had learned previously.
          */

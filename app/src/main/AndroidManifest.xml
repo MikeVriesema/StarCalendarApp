@@ -22,17 +22,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".preferences">
+        <activity android:name=".PreferenceActivity">
         </activity>
-        <activity android:name=".Information">
+        <activity android:name=".InformationActivity">
         </activity>
-        <activity android:name=".CalendarMain">
+        <activity android:name=".CalendarActivity">
         </activity>
-        <activity android:name=".Weather">
+        <activity android:name=".WeatherActivity">
         </activity>
-        <activity android:name=".Compass">
+        <activity android:name=".CompassActivity">
         </activity>
-        <activity android:name=".About">
+        <activity android:name=".AboutActivity">
         </activity>
     </application>
 

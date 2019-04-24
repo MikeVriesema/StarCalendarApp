@@ -7,14 +7,17 @@
 package mikevriesema.ul.starcalendar;
 
 import android.os.Bundle;
-import android.widget.TextView;
+import android.preference.PreferenceActivity;
 
-public class About extends MainActivity {
-    TextView text;
+public class PreferenceActivity extends android.preference.PreferenceActivity {
+
+    public final static String KEY_USER = "KEY_USER";
+    public final static String KEY_CITY = "KEY_CITY";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about);
-        text = (TextView) findViewById(R.id.abouttext);
+        addPreferencesFromResource(R.xml.main_preferences);
     }
 }
+

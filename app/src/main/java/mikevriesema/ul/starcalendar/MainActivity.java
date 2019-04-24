@@ -55,28 +55,28 @@ public class MainActivity extends Activity {
         weather.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent weatherIntent = new Intent(getBaseContext(), Weather.class);
+                Intent weatherIntent = new Intent(getBaseContext(), WeatherActivity.class);
                 startActivity(weatherIntent);
             }
         });
         compass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent compassIntent = new Intent(getBaseContext(), Compass.class);
+                Intent compassIntent = new Intent(getBaseContext(), CompassActivity.class);
                 startActivity(compassIntent);
             }
         });
         information.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent infoIntent = new Intent(getBaseContext(), Information.class);
+                Intent infoIntent = new Intent(getBaseContext(), InformationActivity.class);
                 startActivity(infoIntent);
             }
         });
         calendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent calendarIntent = new Intent(getBaseContext(), CalendarMain.class);
+                Intent calendarIntent = new Intent(getBaseContext(), CalendarActivity.class);
                 startActivity(calendarIntent);
             }
         });
@@ -103,12 +103,12 @@ public class MainActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.settings: {
-                Intent preferencesIntent = new Intent(getBaseContext(), preferences.class);
+                Intent preferencesIntent = new Intent(getBaseContext(), PreferenceActivity.class);
                 startActivity(preferencesIntent);
                 break;
             }
             case R.id.help: {
-                Intent aboutIntent = new Intent(getBaseContext(), About.class);
+                Intent aboutIntent = new Intent(getBaseContext(), AboutActivity.class);
                 startActivity(aboutIntent);
                 break;
             }
@@ -137,7 +137,7 @@ public class MainActivity extends Activity {
     }
 
     private void updateUIFromPreferences(SharedPreferences prefs) {
-        String name = prefs.getString(preferences.KEY_USER,"");
+        String name = prefs.getString(PreferenceActivity.KEY_USER,"");
         if (!name.contentEquals("")) {
             name_view.setText(name+"'s");
         }

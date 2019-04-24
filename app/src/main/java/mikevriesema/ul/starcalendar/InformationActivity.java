@@ -18,7 +18,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 
-public class Information extends MainActivity {
+public class InformationActivity extends MainActivity {
 
     Spinner starSpinner;
     String[] starNames;

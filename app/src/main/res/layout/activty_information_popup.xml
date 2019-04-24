@@ -31,8 +31,8 @@
 	 	Table Layout = https://www.tutorialspoint.com/android/android_table_layout.htm
 	 -->
 	<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:layout_width="fill_parent"
-		android:layout_height="fill_parent"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
 		android:layout_below="@+id/objectimage"
 		android:layout_marginTop="30dp"
 		android:stretchColumns="2">
