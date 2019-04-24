@@ -1,5 +1,10 @@
+/*/////////////////////////////////
+ * Application: StarCalendar
+ *
+ * Author: Mike Vriesema 17212359
+ * Date: 24/04/2019
+ */////////////////////////////////
 package mikevriesema.ul.starcalendar;
-
 
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;

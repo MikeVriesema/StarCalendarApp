@@ -1,8 +1,12 @@
+/*/////////////////////////////////
+ * Application: StarCalendar
+ *
+ * Author: Mike Vriesema 17212359
+ * Date: 24/04/2019
+ */////////////////////////////////
 package mikevriesema.ul.starcalendar;
 
 import android.app.Dialog;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;

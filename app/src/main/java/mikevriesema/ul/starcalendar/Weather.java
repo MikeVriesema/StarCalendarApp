@@ -1,12 +1,15 @@
+/*/////////////////////////////////
+ * Application: StarCalendar
+ *
+ * Author: Mike Vriesema 17212359
+ * Date: 24/04/2019
+ */////////////////////////////////
 package mikevriesema.ul.starcalendar;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
-import android.preference.PreferenceActivity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -15,7 +18,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import org.json.JSONException;

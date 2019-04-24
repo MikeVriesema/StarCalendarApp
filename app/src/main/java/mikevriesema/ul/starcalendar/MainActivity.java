@@ -2,24 +2,20 @@
 * Application: StarCalendar
 *
 * Author: Mike Vriesema 17212359
-* Date: 26/02/2019
+* Date: 24/04/2019
 */////////////////////////////////
 package mikevriesema.ul.starcalendar;
 
 
-import android.Manifest;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.app.Activity;
 import android.preference.PreferenceManager;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,7 +38,6 @@ public class MainActivity extends Activity {
     /*
      * SOURCES:
      * Toolbar back button: https://stackoverflow.com/questions/34110565/how-to-add-back-button-on-actionbar-in-android-studio
-     *
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
