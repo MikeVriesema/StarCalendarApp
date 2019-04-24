@@ -32,12 +32,9 @@ public class Weather extends MainActivity {
     TextView selectCity, cityField, detailsField, currentTemperatureField, humidity_field, pressure_field, weatherIcon, updatedField;
     ProgressBar loader;
     Typeface weatherFont;
-    String city = "";
+    String city;
     String url;
-
-    double lat,lon;
-
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,16 +50,9 @@ public class Weather extends MainActivity {
         weatherIcon = (TextView) findViewById(R.id.weather_icon);
         weatherFont = Typeface.createFromAsset(getAssets(), "fonts/weather_icons.ttf");
         weatherIcon.setTypeface(weatherFont);
-
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        city = prefs.getString(preferences.KEY_CITY,"");
-        if(city == ""){
-            city = getString(R.string.city_default);
-            SharedPreferences.Editor edit;
-            edit = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
-            edit.putString(preferences.KEY_CITY,city);
-            edit.commit();
-        }
+        city = prefs.getString(preferences.KEY_CITY,getString(R.string.city_default));
+        System.out.println(city);
         taskLoadUp(city);
 
         selectCity.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +71,11 @@ public class Weather extends MainActivity {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 city = input.getText().toString();
+                                SharedPreferences.Editor edit;
+                                edit = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
+                                edit.putString(preferences.KEY_CITY,city);
+                                edit.apply();
+                                System.out.println(city);
                                 taskLoadUp(city);
                             }
                         });
@@ -91,10 +86,6 @@ public class Weather extends MainActivity {
                             }
                         });
                 alertDialog.show();
-                SharedPreferences.Editor edit;
-                edit = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
-                edit.putString(preferences.KEY_CITY,city);
-                edit.apply();
             }
         });
     }
@@ -110,11 +101,11 @@ public class Weather extends MainActivity {
             DownloadWeather task = new DownloadWeather();
             task.execute(query);
         } else {
-            Toast.makeText(getApplicationContext(), R.string.no_internet, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.no_internet), Toast.LENGTH_LONG).show();
         }
     }
 
-    class DownloadWeather extends AsyncTask <String,Void,String>{
+    class DownloadWeather extends AsyncTask < String, Void, String > {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -123,9 +114,7 @@ public class Weather extends MainActivity {
         }
         protected String doInBackground(String...args) {
             //url = String.format("api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&units=metric&appid="+R.string.api_key,lat,lon);
-            url = String.format("api.openweathermap.org/data/2.5/weather?q=%s&units=metric&appid="+getString(R.string.api_key),args[0]);
-            //url = "http://api.openweathermap.org/data/2.5/weather?q=" + args[0] + "&units=metric&appid=" + getString(R.string.api_key);
-            System.out.println(url);
+            url = "http://api.openweathermap.org/data/2.5/weather?q=" + args[0] + "&units=metric&appid=" + getString(R.string.api_key);
             String xml = FetchWeather.excuteGet(url);
             return xml;
         }
