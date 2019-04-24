@@ -1,0 +1,170 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="@color/colorPrimary"
+	android:padding="20dp">
+
+	<TextView
+		android:id="@+id/city_field"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentTop="true"
+		android:layout_centerHorizontal="true"
+		android:textSize="24sp"
+		android:textColor="@color/white"
+		android:textAppearance="?android:attr/textAppearanceLarge" />
+
+	<TextView
+		android:id="@+id/pos"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/city_field"
+		android:layout_centerHorizontal="true"
+		android:textColor="@color/white"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		android:textSize="14sp" />
+
+	<TextView
+		android:id="@+id/updated_field"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/pos"
+		android:layout_centerHorizontal="true"
+		android:textColor="@color/white"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		android:textSize="14sp" />
+	<TextView
+		android:id="@+id/selectCity"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:text="@string/change_city"
+		android:textStyle="italic"
+		android:textSize="20sp"
+		android:textColor="@color/colorAccent"
+		android:layout_below="@+id/updated_field"
+		android:layout_centerHorizontal="true"/>
+
+	<TextView
+		android:id="@+id/weather_icon"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/selectCity"
+		android:layout_centerHorizontal="true"
+		android:textColor="@color/white"
+		android:textAppearance="?android:attr/textAppearanceLarge"
+		android:textSize="90sp"
+		/>
+
+	<TextView
+		android:id="@+id/current_temperature_field"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/city_field"
+		android:layout_marginTop="10dp"
+		android:layout_alignParentLeft="true"
+		android:textColor="@color/white"
+		android:textAppearance="?android:attr/textAppearanceLarge"
+		android:textSize="50sp" />
+
+	<TextView
+		android:id="@+id/details_field"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/weather_icon"
+		android:layout_centerHorizontal="true"
+		android:textColor="@color/white"
+		android:textSize="30sp"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		/>
+
+	<TextView
+		android:id="@+id/sunrise"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentLeft="true"
+		android:layout_marginLeft="25dp"
+		android:layout_marginBottom="25dp"
+		android:textColor="@color/white"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		/>
+	<TextView
+		android:id="@+id/sunset"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentRight="true"
+		android:layout_marginRight="25dp"
+		android:layout_marginBottom="25dp"
+		android:textColor="@color/white"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		/>
+
+	<TextView
+		android:id="@+id/wind_speed"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/city_field"
+		android:layout_alignParentRight="true"
+		android:layout_marginTop="10dp"
+		android:textColor="@color/white"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		/>
+
+	<TextView
+		android:id="@+id/humidity_field"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentRight="true"
+		android:layout_below="@+id/wind_speed"
+		android:textColor="@color/white"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		/>
+	<TextView
+		android:id="@+id/pressure_field"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentRight="true"
+		android:layout_below="@+id/humidity_field"
+		android:textColor="@color/white"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		/>
+
+	<TextView
+		android:id="@+id/disclaimer"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_centerHorizontal="true"
+		android:text="@string/disclaimer"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		android:textColor="@color/white"
+		android:textSize="12sp"
+		android:textStyle="bold|italic" />
+
+	<ImageView
+		android:id="@+id/sunrise_icon"
+		android:layout_width="70dp"
+		android:layout_height="70dp"
+		android:layout_above="@+id/sunrise"
+		android:layout_alignParentLeft="true"
+		android:layout_marginLeft="25dp"
+		android:src="@drawable/sunrise" />
+
+	<ImageView
+		android:id="@+id/sunset_icon"
+		android:layout_width="70dp"
+		android:layout_height="70dp"
+		android:layout_above="@+id/sunset"
+		android:layout_alignParentRight="true"
+		android:layout_marginRight="25dp"
+		android:src="@drawable/sunset" />
+
+	<ProgressBar
+		android:id="@+id/loader"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_centerInParent="true"/>
+
+</RelativeLayout>
