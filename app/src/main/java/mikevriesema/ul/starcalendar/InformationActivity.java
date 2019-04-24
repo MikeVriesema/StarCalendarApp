@@ -31,6 +31,7 @@ public class InformationActivity extends MainActivity {
     ImageView starImage;
     StarsDB starDB;
     Dialog infoPopup;
+    int orientation;
 
     /*/////////////////////////////////
      * ON CREATE
@@ -55,15 +56,10 @@ public class InformationActivity extends MainActivity {
 
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                String[] values = starDB.getAll();
-                for(int i = 0;i<values.length;i++){
-                    System.out.println(values[i]);
-                }
                 if (starNames.length>position && position != 0) {
                     popUpObject(starNames[position]);
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
 
@@ -74,13 +70,12 @@ public class InformationActivity extends MainActivity {
     }
 
     public void popUpObject(String objectName){
-        infoPopup.setContentView(R.layout.activty_information_popup);
+        infoPopup.setContentView(R.layout.activity_information_popup);
         close = (TextView) infoPopup.findViewById(R.id.close);
         objectimage = (ImageView) infoPopup.findViewById(R.id.objectimage);
         objectInfo = (TextView) infoPopup.findViewById(R.id.objectInfo);
         massInfo = (TextView) infoPopup.findViewById(R.id.massInfo);
         dimensionInfo = (TextView) infoPopup.findViewById(R.id.dimensionInfo);
-
 
         objectInfo.setText(objectName);
         dimensionInfo.setText(starDB.getStarDimensions((objectName)));

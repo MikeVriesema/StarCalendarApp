@@ -24,9 +24,11 @@
         </activity>
         <activity android:name=".AppPreferences">
         </activity>
-        <activity android:name=".InformationActivity">
+        <activity android:name=".InformationActivity"
+                android:screenOrientation="portrait" >
         </activity>
-        <activity android:name=".CalendarActivity">
+        <activity android:name=".CalendarActivity"
+            android:screenOrientation="portrait">
         </activity>
         <activity android:name=".WeatherActivity">
         </activity>
