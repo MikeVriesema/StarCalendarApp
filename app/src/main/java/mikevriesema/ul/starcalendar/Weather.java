@@ -15,11 +15,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
@@ -29,12 +31,12 @@ public class Weather extends MainActivity {
      * SOURCE:
      * Weather info and remote fetch = https://androstock.com/tutorials/create-a-weather-app-on-android-android-studio.html
      */
-    TextView selectCity, cityField, detailsField, currentTemperatureField, humidity_field, pressure_field, weatherIcon, updatedField;
+    TextView selectCity, cityField, detailsField, currentTemperatureField, humidity_field, pressure_field, weatherIcon, updatedField, pos,  wind_speed, sunrise , sunset;
     ProgressBar loader;
     Typeface weatherFont;
     String city;
     String url;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,12 +49,15 @@ public class Weather extends MainActivity {
         currentTemperatureField = (TextView) findViewById(R.id.current_temperature_field);
         humidity_field = (TextView) findViewById(R.id.humidity_field);
         pressure_field = (TextView) findViewById(R.id.pressure_field);
+        wind_speed = (TextView) findViewById(R.id.wind_speed);
+        sunrise = (TextView) findViewById(R.id.sunrise);
+        sunset = (TextView) findViewById(R.id.sunset);
+        pos = (TextView) findViewById(R.id.pos);
         weatherIcon = (TextView) findViewById(R.id.weather_icon);
         weatherFont = Typeface.createFromAsset(getAssets(), "fonts/weather_icons.ttf");
         weatherIcon.setTypeface(weatherFont);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
         city = prefs.getString(preferences.KEY_CITY,getString(R.string.city_default));
-        System.out.println(city);
         taskLoadUp(city);
 
         selectCity.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +80,6 @@ public class Weather extends MainActivity {
                                 edit = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
                                 edit.putString(preferences.KEY_CITY,city);
                                 edit.apply();
-                                System.out.println(city);
                                 taskLoadUp(city);
                             }
                         });
@@ -113,9 +117,9 @@ public class Weather extends MainActivity {
 
         }
         protected String doInBackground(String...args) {
-            //url = String.format("api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&units=metric&appid="+R.string.api_key,lat,lon);
             url = "http://api.openweathermap.org/data/2.5/weather?q=" + args[0] + "&units=metric&appid=" + getString(R.string.api_key);
             String xml = FetchWeather.excuteGet(url);
+            System.out.println(xml);
             return xml;
         }
         @Override
@@ -126,12 +130,17 @@ public class Weather extends MainActivity {
                     JSONObject details = json.getJSONArray("weather").getJSONObject(0);
                     JSONObject main = json.getJSONObject("main");
                     DateFormat df = DateFormat.getDateTimeInstance();
+                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
 
-                    cityField.setText(json.getString("name").toUpperCase(Locale.US) + ", " + json.getJSONObject("sys").getString("country"));
+                    cityField.setText(json.getString("name").toUpperCase(Locale.US)+", "+json.getJSONObject("sys").getString("country"));
                     detailsField.setText(details.getString("description").toUpperCase(Locale.US));
-                    currentTemperatureField.setText(String.format("%.2f", main.getDouble("temp")) + "°");
-                    humidity_field.setText("Humidity: " + main.getString("humidity") + "%");
-                    pressure_field.setText("Pressure: " + main.getString("pressure") + " hPa");
+                    currentTemperatureField.setText(String.format("%.2f", main.getDouble("temp"))+"°C");
+                    sunrise.setText("Sunrise: "+sdf.format(new Date(json.getJSONObject("sys").getLong("sunrise") * 1000)));
+                    sunset.setText("Sunset: "+sdf.format(new Date(json.getJSONObject("sys").getLong("sunset") * 1000)));
+                    humidity_field.setText("Humidity: "+main.getString("humidity")+"%");
+                    pressure_field.setText("Pressure: "+main.getString("pressure")+" hPa");
+                    wind_speed.setText("Wind: "+ json.getJSONObject("wind").getString("speed")+" km " + fetchDirection(json.getJSONObject("wind").getString("deg")));
+                    pos.setText("Lon: "+json.getJSONObject("coord").getString("lon")+" Lat: "+json.getJSONObject("coord").getString("lat"));
                     updatedField.setText(df.format(new Date(json.getLong("dt") * 1000)));
                     weatherIcon.setText(Html.fromHtml(FetchWeather.setWeatherIcon(details.getInt("id"),
                             json.getJSONObject("sys").getLong("sunrise") * 1000,
@@ -142,6 +151,29 @@ public class Weather extends MainActivity {
             } catch (JSONException e) {
                 Toast.makeText(getApplicationContext(), "Error, Check City", Toast.LENGTH_SHORT).show();
             }
+        }
+
+        public String fetchDirection(String degrees){
+            String direction = "";
+            int degree = Integer.parseInt(degrees);
+            if((degree >= 0 && degree < 23) || (degree >= 337 && degree <= 360)){ //360/0 N
+                direction = "N";
+            }else if(degree >= 23 && degree < 68){ //45 NE
+                direction = "NE";
+            }else if(degree >= 68 && degree < 112){ //90 E
+                direction = "E";
+            }else if(degree >= 112 && degree < 158){ //135 SE
+                direction = "SE";
+            }else if(degree >= 158 && degree < 203){ //180 S
+                direction = "S";
+            }else if(degree >= 203 && degree < 248){ //225 SW
+                direction = "SW";
+            }else if(degree >= 248 && degree < 293){ //270 W
+                direction = "W";
+            }else if(degree >= 293 && degree < 337){ //315 NW
+                direction = "NW";
+            }
+            return direction;
         }
     }
 }
