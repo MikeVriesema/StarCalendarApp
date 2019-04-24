@@ -9,7 +9,7 @@ package mikevriesema.ul.starcalendar;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
-public class PreferenceActivity extends android.preference.PreferenceActivity {
+public class AppPreferences extends android.preference.PreferenceActivity {
 
     public final static String KEY_USER = "KEY_USER";
     public final static String KEY_CITY = "KEY_CITY";

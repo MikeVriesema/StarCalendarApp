@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">StarCalendar</string>
     <string name="user">User</string>
-    <string name="menu_settings">Username</string>
+    <string name="menu_settings">Settings</string>
     <string name="menu_help">About</string>
     <string name="starlist">Star List</string>
     <string name="information">Information</string>

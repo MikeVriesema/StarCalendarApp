@@ -103,7 +103,7 @@ public class MainActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.settings: {
-                Intent preferencesIntent = new Intent(getBaseContext(), PreferenceActivity.class);
+                Intent preferencesIntent = new Intent(getBaseContext(), AppPreferences.class);
                 startActivity(preferencesIntent);
                 break;
             }
@@ -137,7 +137,7 @@ public class MainActivity extends Activity {
     }
 
     private void updateUIFromPreferences(SharedPreferences prefs) {
-        String name = prefs.getString(PreferenceActivity.KEY_USER,"");
+        String name = prefs.getString(AppPreferences.KEY_USER,"");
         if (!name.contentEquals("")) {
             name_view.setText(name+"'s");
         }

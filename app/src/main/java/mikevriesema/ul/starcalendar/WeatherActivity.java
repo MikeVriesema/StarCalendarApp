@@ -59,7 +59,7 @@ public class WeatherActivity extends MainActivity {
         weatherFont = Typeface.createFromAsset(getAssets(), "fonts/weather_icons.ttf");
         weatherIcon.setTypeface(weatherFont);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
-        city = prefs.getString(PreferenceActivity.KEY_CITY,getString(R.string.city_default));
+        city = prefs.getString(AppPreferences.KEY_CITY,getString(R.string.city_default));
         taskLoadUp(city);
 
         selectCity.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +80,7 @@ public class WeatherActivity extends MainActivity {
                                 city = input.getText().toString();
                                 SharedPreferences.Editor edit;
                                 edit = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
-                                edit.putString(PreferenceActivity.KEY_CITY,city);
+                                edit.putString(AppPreferences.KEY_CITY,city);
                                 edit.apply();
                                 taskLoadUp(city);
                             }
