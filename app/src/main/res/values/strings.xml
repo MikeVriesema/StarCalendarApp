@@ -11,15 +11,23 @@
     <string name="eventinfo">Mercury is in retrograde</string>
     <string name="placeholder"> </string>
     <string name="confirm_add">Add Event to Calendar</string>
-    <string name="subject">Object:</string>
-    <string name="mass">Mass:</string>
-    <string name="diametersize">Size:</string>
-    <string name="gravity">Gravity:</string>
+    <string name="subject">Object: </string>
+    <string name="mass">Mass: </string>
+    <string name="diametersize">Size: </string>
+    <string name="gravity">Gravity: </string>
     <string name="change_city">Change City</string>
     <string name="api_key">27bba67d4f9f2258695c40a1e74c16da</string>
     <string name="no_internet">No Internet Connection</string>
     <string name="city_default">Dublin,IE</string>
     <string name="disclaimer">All times are in relation to system time!</string>
+    <string name="change">Change</string>
+    <string name="city_error">Error, Change City!</string>
+    <string name="sunrise">Sunrise: </string>
+    <string name="sunset">Sunset: </string>
+    <string name="wind">Wind: </string>
+    <string name="humidity">Humidity: </string>
+    <string name="pressure">Pressure: </string>
+    <string name="fact">Fact: </string>
     <string name="about">About</string>
     <string name="about1">This app is designed to help you observe the night sky,currently with emphasis on the moon phases.\n\nThere are options to view the weather in your location to plan before going stargazing aswell as a compass to get your orientation right.\n
     </string>

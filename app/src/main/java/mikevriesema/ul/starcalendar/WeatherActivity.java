@@ -66,7 +66,7 @@ public class WeatherActivity extends MainActivity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(WeatherActivity.this);
-                alertDialog.setTitle("Change City");
+                alertDialog.setTitle(getString(R.string.change_city));
                 final EditText input = new EditText(WeatherActivity.this);
                 input.setText(city);
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
@@ -74,7 +74,7 @@ public class WeatherActivity extends MainActivity {
                         LinearLayout.LayoutParams.MATCH_PARENT);
                 input.setLayoutParams(lp);
                 alertDialog.setView(input);
-                alertDialog.setPositiveButton("Change",
+                alertDialog.setPositiveButton(getString(R.string.change),
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 city = input.getText().toString();
@@ -116,11 +116,10 @@ public class WeatherActivity extends MainActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             loader.setVisibility(View.VISIBLE);
-
         }
         protected String doInBackground(String...args) {
             url = "http://api.openweathermap.org/data/2.5/weather?q=" + args[0] + "&units=metric&appid=" + getString(R.string.api_key);
-            String xml = FetchWeather.excuteGet(url);
+            String xml = FetchWeather.executeGet(url);
             System.out.println(xml);
             return xml;
         }
@@ -137,11 +136,11 @@ public class WeatherActivity extends MainActivity {
                     cityField.setText(json.getString("name").toUpperCase(Locale.US)+", "+json.getJSONObject("sys").getString("country"));
                     detailsField.setText(details.getString("description").toUpperCase(Locale.US));
                     currentTemperatureField.setText(String.format("%.2f", main.getDouble("temp"))+"°C");
-                    sunrise.setText("Sunrise: "+sdf.format(new Date(json.getJSONObject("sys").getLong("sunrise") * 1000)));
-                    sunset.setText("Sunset: "+sdf.format(new Date(json.getJSONObject("sys").getLong("sunset") * 1000)));
-                    humidity_field.setText("Humidity: "+main.getString("humidity")+"%");
-                    pressure_field.setText("Pressure: "+main.getString("pressure")+" hPa");
-                    wind_speed.setText("Wind: "+ json.getJSONObject("wind").getString("speed")+" km " + fetchDirection(json.getJSONObject("wind").getString("deg")));
+                    sunrise.setText(getString(R.string.sunrise)+sdf.format(new Date(json.getJSONObject("sys").getLong("sunrise") * 1000)));
+                    sunset.setText(getString(R.string.sunset)+sdf.format(new Date(json.getJSONObject("sys").getLong("sunset") * 1000)));
+                    humidity_field.setText(getString(R.string.humidity)+main.getString("humidity")+"%");
+                    pressure_field.setText(getString(R.string.pressure)+main.getString("pressure")+" hPa");
+                    wind_speed.setText(getString(R.string.wind)+ json.getJSONObject("wind").getString("speed")+" km " + fetchDirection(json.getJSONObject("wind").getString("deg")));
                     pos.setText("Lon: "+json.getJSONObject("coord").getString("lon")+" Lat: "+json.getJSONObject("coord").getString("lat"));
                     updatedField.setText(df.format(new Date(json.getLong("dt") * 1000)));
                     weatherIcon.setText(Html.fromHtml(FetchWeather.setWeatherIcon(details.getInt("id"),
@@ -151,7 +150,7 @@ public class WeatherActivity extends MainActivity {
                     loader.setVisibility(View.GONE);
                 }
             } catch (JSONException e) {
-                Toast.makeText(getApplicationContext(), "Error, Check City", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.city_error), Toast.LENGTH_SHORT).show();
             }
         }
 

@@ -23,11 +23,6 @@ import java.util.GregorianCalendar;
 
 public class CalendarActivity extends MainActivity {
 
-    /*/////////////////////////////////
-     * ON CREATE
-     *
-     */////////////////////////////////
-
     CalendarView calendar;
     TextView dateplan;
     TextView close;
@@ -50,7 +45,6 @@ public class CalendarActivity extends MainActivity {
         popDialog = new Dialog(this);
         calendar = (CalendarView) findViewById(R.id.calendar);
         dateplan = (TextView) findViewById(R.id.date);
-
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
@@ -64,9 +58,6 @@ public class CalendarActivity extends MainActivity {
                 popUpEvent();
             }
         });
-        /*
-
-         */
     }
     public void createEvent(int dayOfMonth,int month,int year){
         Intent event_intent = new Intent(Intent.ACTION_INSERT);

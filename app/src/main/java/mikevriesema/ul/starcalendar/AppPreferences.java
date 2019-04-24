@@ -7,7 +7,6 @@
 package mikevriesema.ul.starcalendar;
 
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
 
 public class AppPreferences extends android.preference.PreferenceActivity {
 

@@ -23,8 +23,6 @@ import android.widget.TextView;
         SensorManager sensorMan;
         TextView bearing;
 
-
-
         /*
          * SOURCES:
          *  CompassActivity sensor calculations + rotation animation = https://www.javacodegeeks.com/2013/09/android-compass-code-example.html
@@ -63,10 +61,8 @@ import android.widget.TextView;
 
             @Override
             public void onSensorChanged(SensorEvent event) {
-
                 float degree = Math.round(event.values[0]);
                 bearing.setText("Heading: " + Float.toString(degree) + " degrees");
-
                 RotateAnimation rotationAn = new RotateAnimation(
                         currentDegree,
                         -degree,

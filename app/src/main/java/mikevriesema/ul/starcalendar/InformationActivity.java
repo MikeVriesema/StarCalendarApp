@@ -31,12 +31,7 @@ public class InformationActivity extends MainActivity {
     ImageView starImage;
     StarsDB starDB;
     Dialog infoPopup;
-    int orientation;
 
-    /*/////////////////////////////////
-     * ON CREATE
-     *
-     */////////////////////////////////
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,12 +56,9 @@ public class InformationActivity extends MainActivity {
                 }
             }
             @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-
+            public void onNothingSelected(AdapterView<?> arg0){
             }
-
         });
-
     }
 
     public void popUpObject(String objectName){

@@ -21,14 +21,13 @@ public class FetchWeather {
      * SOURCE:
      * WeatherActivity info and fetch weather = https://androstock.com/tutorials/create-a-weather-app-on-android-android-studio.html
      */
-
     public static boolean isNetworkAvailable(Context context)
     {
         return ((ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo() != null;
     }
 
 
-    public static String excuteGet(String targetURL)
+    public static String executeGet(String targetURL)
     {
         URL url;
         HttpURLConnection connection = null;
