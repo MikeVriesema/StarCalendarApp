@@ -53,6 +53,8 @@ public class CalendarActivity extends MainActivity {
     /*
      * SOURCES:
      *  Information on calendar intents: https://stackoverflow.com/questions/3721963/how-to-add-calendar-events-in-android
+     *  Moon API : http://www.farmsense.net/api/astro-widgets/
+     *  Asynctask help was taken from our own example for threading and the weather one I previously made
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
