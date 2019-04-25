@@ -2,7 +2,7 @@
 * Application: StarCalendar
 *
 * Author: Mike Vriesema 17212359
-* Date: 24/04/2019
+* Date: 25/04/2019
 */////////////////////////////////
 package mikevriesema.ul.starcalendar;
 
@@ -82,7 +82,7 @@ public class MainActivity extends Activity {
         });
 
 
-        myPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        myPrefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext()); //UPDATES USERNAME IF PRESENT/IF CHANGED
         updateUIFromPreferences(myPrefs);
         prefListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
@@ -113,7 +113,7 @@ public class MainActivity extends Activity {
                 break;
             }
             case android.R.id.home:
-                //app icon in action bar clicked; go to homepage
+                //THIS IS USED IN ALL ACTIVITIES TO HANDLE THE BACK BUTTON IN THE ACTION BAR
                 Intent intent = new Intent(this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
@@ -122,8 +122,7 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public Bitmap ImageViaAssets(String fileName){
-
+    public Bitmap ImageViaAssets(String fileName){ //THIS METHOD IS HERE AND USED IN OTHER CLASSES BY EXTENDING THE MAIN ACTIVITY,IT LOADS IMAGES FROM ASSETS BY NAME
         AssetManager assetmanager = getAssets();
         InputStream is = null;
         try{
@@ -144,6 +143,5 @@ public class MainActivity extends Activity {
     }
 
     public void SavePreferences(SharedPreferences prefs){
-
     }
 }

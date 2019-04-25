@@ -2,7 +2,7 @@
  * Application: StarCalendar
  *
  * Author: Mike Vriesema 17212359
- * Date: 24/04/2019
+ * Date: 25/04/2019
  */////////////////////////////////
 package mikevriesema.ul.starcalendar;
 
@@ -33,7 +33,6 @@ import android.widget.TextView;
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.compass_information);
-
             image = (ImageView) findViewById(R.id.imageViewCompass);
             bearing = (TextView) findViewById(R.id.bearing);
             sensorMan = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -59,6 +58,9 @@ import android.widget.TextView;
                 // not in use
             }
 
+            /*
+             * THIS WAS THE KEY PART TAKEN FROM THE ONLINE SOURCE
+             */
             @Override
             public void onSensorChanged(SensorEvent event) {
                 float degree = Math.round(event.values[0]);

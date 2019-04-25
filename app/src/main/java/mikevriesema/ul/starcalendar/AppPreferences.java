@@ -10,8 +10,8 @@ import android.os.Bundle;
 
 public class AppPreferences extends android.preference.PreferenceActivity {
 
-    public final static String KEY_USER = "KEY_USER";
-    public final static String KEY_CITY = "KEY_CITY";
+    public final static String KEY_USER = "KEY_USER"; //USERNAME FOR MAIN ACTIVITY
+    public final static String KEY_CITY = "KEY_CITY"; //CITY FOR WEATHER CHECK
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

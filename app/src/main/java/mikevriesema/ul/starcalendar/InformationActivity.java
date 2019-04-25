@@ -2,7 +2,7 @@
  * Application: StarCalendar
  *
  * Author: Mike Vriesema 17212359
- * Date: 24/04/2019
+ * Date: 25/04/2019
  */////////////////////////////////
 package mikevriesema.ul.starcalendar;
 
@@ -45,7 +45,7 @@ public class InformationActivity extends MainActivity {
         starDB = new StarsDB(getApplicationContext());
         infoPopup = new Dialog(this);
         starNames = starDB.getStarNames();
-        ArrayAdapter<String> starAdapter = new ArrayAdapter<String>(getBaseContext(), R.layout.list_item, starNames);
+        ArrayAdapter<String> starAdapter = new ArrayAdapter<String>(getBaseContext(), R.layout.list_item, starNames); //MODIFIED FROM BEER DB
         starAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         starSpinner.setAdapter(starAdapter);
 
@@ -54,7 +54,7 @@ public class InformationActivity extends MainActivity {
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 if (starNames.length>position && position != 0) {
-                    popUpObject(starNames[position]);
+                    popUpObject(starNames[position]); //VERY PROUD,PASSES STAR NAME INTO THE POPUP
                 }
             }
             @Override
@@ -63,7 +63,7 @@ public class InformationActivity extends MainActivity {
         });
     }
 
-    public void popUpObject(String objectName){
+    public void popUpObject(String objectName){ //UPDATES THE TEXT USING THE DATABASE VALUES WHICH ARE ACQUIRED USING THE PASSED IN STAR NAME
         infoPopup.setContentView(R.layout.activity_information_popup);
         close = (TextView) infoPopup.findViewById(R.id.close);
         objectimage = (ImageView) infoPopup.findViewById(R.id.objectimage);

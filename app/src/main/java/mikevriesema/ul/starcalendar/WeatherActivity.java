@@ -2,7 +2,7 @@
  * Application: StarCalendar
  *
  * Author: Mike Vriesema 17212359
- * Date: 24/04/2019
+ * Date: 25/04/2019
  */////////////////////////////////
 package mikevriesema.ul.starcalendar;
 
@@ -31,7 +31,7 @@ public class WeatherActivity extends MainActivity {
 
     /*
      * SOURCE:
-     * WeatherActivity info and remote fetch = https://androstock.com/tutorials/create-a-weather-app-on-android-android-studio.html
+     * WeatherActivity info = https://androstock.com/tutorials/create-a-weather-app-on-android-android-studio.html
      */
     TextView selectCity, cityField, detailsField, currentTemperatureField, humidity_field, pressure_field, weatherIcon, updatedField, pos,  wind_speed, sunrise , sunset;
     ProgressBar loader;
@@ -64,7 +64,7 @@ public class WeatherActivity extends MainActivity {
 
         selectCity.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {  //LISTENER TO CHANGE CITY
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(WeatherActivity.this);
                 alertDialog.setTitle(getString(R.string.change_city));
                 final EditText input = new EditText(WeatherActivity.this);
@@ -77,7 +77,7 @@ public class WeatherActivity extends MainActivity {
                 alertDialog.setPositiveButton(getString(R.string.change),
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                city = input.getText().toString();
+                                city = input.getText().toString(); //UPDATES SHARED PREFERENCE FOR THE CITY VALUE AND RELAUNCHES THE WEATHER TASK
                                 SharedPreferences.Editor edit;
                                 edit = PreferenceManager.getDefaultSharedPreferences(getApplicationContext()).edit();
                                 edit.putString(AppPreferences.KEY_CITY,city);
@@ -85,7 +85,7 @@ public class WeatherActivity extends MainActivity {
                                 taskLoadUp(city);
                             }
                         });
-                alertDialog.setNegativeButton("Cancel",
+                alertDialog.setNegativeButton(getString(R.string.cancel),
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.cancel();
@@ -99,11 +99,11 @@ public class WeatherActivity extends MainActivity {
     @Override
     public void onResume(){
         super.onResume();
-        taskLoadUp(city);
+        taskLoadUp(city); //STARTS TASK TO FETCH WEATHER FOR PASSED IN CITY NAME
     }
 
     public void taskLoadUp(String query) {
-        if (FetchData.isNetworkAvailable(getApplicationContext())) {
+        if (FetchData.isNetworkAvailable(getApplicationContext())) { //CHECKS CONNECTION
             DownloadWeather task = new DownloadWeather();
             task.execute(query);
         } else {
@@ -119,20 +119,20 @@ public class WeatherActivity extends MainActivity {
         }
         protected String doInBackground(String...args) {
             url = "http://api.openweathermap.org/data/2.5/weather?q=" + args[0] + "&units=metric&appid=" + getString(R.string.api_key);
-            String xml = FetchData.executeGet(url);
-            System.out.println(xml);
+            String xml = FetchData.executeGet(url); //USES CONNECTION AND FETCH SYSTEM WITH URL TO RETRIEVE JSON DATA
             return xml;
         }
         @Override
-        protected void onPostExecute(String xml) {
+        protected void onPostExecute(String xml) { //PROCESSING THE WEATHER DATA
             try {
-                JSONObject json = new JSONObject(xml);
+                JSONObject json = new JSONObject(xml); //MAKE A NEW JSON OBJECT FROM THE STRING
                 if (json != null) {
                     JSONObject details = json.getJSONArray("weather").getJSONObject(0);
                     JSONObject main = json.getJSONObject("main");
                     DateFormat df = DateFormat.getDateTimeInstance();
                     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
 
+                    //RETRIEVE THE INDIVIDUAL FIELDS FROM THE JSON OBJECT AND UPDATE THE TEXTVIEWS
                     cityField.setText(json.getString("name").toUpperCase(Locale.US)+", "+json.getJSONObject("sys").getString("country"));
                     detailsField.setText(details.getString("description").toUpperCase(Locale.US));
                     currentTemperatureField.setText(String.format("%.2f", main.getDouble("temp"))+"°C");
@@ -151,12 +151,12 @@ public class WeatherActivity extends MainActivity {
                 }
             } catch (JSONException e) {
                 Toast.makeText(getApplicationContext(), getString(R.string.city_error), Toast.LENGTH_SHORT).show();
-                taskLoadUp(getString(R.string.city_default));
+                taskLoadUp(getString(R.string.city_default)); //IF THE CITY FAILS AND NO WEATHER DATA IS FOUND IT RUNS THE DEFAULT WEATHER STRING
             }
         }
 
-        public String fetchDirection(String degrees){
-            String direction = "";
+        public String fetchDirection(String degrees){ //I HAD TO CREATE THIS METHOD TO GET THE DIRECTION FROM THE DEGREES ASSOCIATED WITH THE WIND DATA
+            String direction = ""; //I WANTED TO USE SWITCH CASES BUT SINCE THE DEGREES IS NOT CONSISTENT AND IS BETWEEN A RANGE IT WOULDN'T WORK
             int degree = Integer.parseInt(degrees);
             if((degree >= 0 && degree < 23) || (degree >= 337 && degree <= 360)){ //360/0 N
                 direction = "N";

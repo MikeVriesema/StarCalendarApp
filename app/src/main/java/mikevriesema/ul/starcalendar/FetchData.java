@@ -2,7 +2,7 @@
  * Application: StarCalendar
  *
  * Author: Mike Vriesema 17212359
- * Date: 24/04/2019
+ * Date: 25/04/2019
  */////////////////////////////////
 package mikevriesema.ul.starcalendar;
 
@@ -19,7 +19,8 @@ public class FetchData {
 
     /*
      * SOURCE:
-     * WeatherActivity info and fetch weather = https://androstock.com/tutorials/create-a-weather-app-on-android-android-studio.html
+     * Fetch method = https://androstock.com/tutorials/create-a-weather-app-on-android-android-studio.html
+     * This was adjusted to be a generalised method for retrieving json data from a url API
      */
     public static boolean isNetworkAvailable(Context context)
     {
@@ -32,40 +33,44 @@ public class FetchData {
         URL url;
         HttpURLConnection connection = null;
         try {
-            //Create connection
+            //CREATES A NEW HTTP CONNECTION TO THE PASSED IN URL
             url = new URL(targetURL);
             connection = (HttpURLConnection)url.openConnection();
             connection.setRequestProperty("content-type", "application/json;  charset=utf-8");
             connection.setRequestProperty("Content-Language", "en-US");
             connection.setUseCaches (false);
-            connection.setDoInput(true);
-            connection.setDoOutput(false);
+            connection.setDoInput(true); //ONLY TAKING INPUT
+            connection.setDoOutput(false); //DO NOT NEED TO WRITE TO A SERVER
 
-            InputStream is;
-            int status = connection.getResponseCode();
+            InputStream is; //NEW INPUT STREAM GETS CREATED
+            int status = connection.getResponseCode(); //CHECK IF THE CONNECTION IS ESTABLISHED SUCCESSFULLY
             if (status != HttpURLConnection.HTTP_OK)
                 is = connection.getErrorStream();
             else
-                is = connection.getInputStream();
+                is = connection.getInputStream(); //IF IT IS WE BEGIN PULLING THE DATA INTO THE INPUT STREAM
             BufferedReader rd = new BufferedReader(new InputStreamReader(is));
             String line;
-            StringBuffer response = new StringBuffer();
-            while((line = rd.readLine()) != null) {
+            StringBuilder response = new StringBuilder();
+            while((line = rd.readLine()) != null) { //THE BUFFERED READER ADDS THE DATA TO THE END OF THE RESPONSE STRINGBUILDER
                 response.append(line);
                 response.append('\r');
             }
-            rd.close();
-            return response.toString();
+            rd.close(); //GOTTA CLOSE THEM READERS ELSE THE OPEN CONNECTIONS USE RESOURCES
+            return response.toString(); //CONVERT RESPONSE BACK TO STRING AND RETURN IT FOR PROCESSING
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(); //DEBUGGING WITH THAT STACKTRACE
             return null;
         } finally {
             if(connection != null) {
-                connection.disconnect();
+                connection.disconnect(); //GOTTA CLOSE THEM READERS ELSE THE OPEN CONNECTIONS USE RESOURCES
             }
         }
     }
 
+
+    /*
+     * WEATHER SPECIFIC STUFF HERE,USES THE ICONS IN THE FONT FILE
+     */
     public static String setWeatherIcon(int actualId, long sunrise, long sunset){
         int id = actualId / 100;
         String icon = "";
