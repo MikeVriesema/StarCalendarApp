@@ -29,6 +29,7 @@
     <string name="humidity">Humidity: </string>
     <string name="pressure">Pressure: </string>
     <string name="moon">Moon</string>
+    <string name="phase">Phase</string>
     <string name="fact">Fact: </string>
     <string name="about">About</string>
     <string name="about1">This app is designed to help you observe the night sky,currently with emphasis on the moon phases.\n\nThere are options to view the weather in your location to plan before going stargazing aswell as a compass to get your orientation right.\n

@@ -35,6 +35,17 @@
 		android:textColor="@color/white"
 		android:textStyle="bold"/>
 
+	<TextView
+		android:id="@+id/moonphase"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_centerHorizontal="true"
+		android:layout_below="@+id/eventinfo"
+		android:textSize="20dp"
+		android:text="@string/placeholder"
+		android:textColor="@color/white"
+		android:textStyle="bold"/>
+
 	<Button
 		android:id="@+id/confirm"
 		android:layout_width="wrap_content"

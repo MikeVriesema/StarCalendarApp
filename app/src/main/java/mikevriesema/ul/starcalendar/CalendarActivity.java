@@ -32,6 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -41,8 +42,12 @@ public class CalendarActivity extends MainActivity {
     TextView dateplan;
     String url;
     String moon_type;
+    String moon_phase;
+    String dateValue;
+    Date date;
     TextView close;
     TextView eventInfo;
+    TextView moonPhase;
     ImageView eventImage;
     Button confirm;
     Dialog popDialog;
@@ -59,45 +64,45 @@ public class CalendarActivity extends MainActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
         moon_type = getString(R.string.moon);
+        moon_phase = getString(R.string.phase);
         popDialog = new Dialog(this);
         calendar = (CalendarView) findViewById(R.id.calendar);
         dateplan = (TextView) findViewById(R.id.date);
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                day_value = dayOfMonth;
+                month_value = month;
+                year_value = year;
                 String[] months = getResources().getStringArray(R.array.months);
                 String events = "";
                 String newDate = dayOfMonth + " of " + months[month] + " " + year + "\n" + events;
                 dateplan.setText(newDate);
-                String dateValue=""+dayOfMonth+"/"+month+"/"+year;
-                Date date= null;
+                month = month+1;
+                String dateValue=""+day_value+"/"+month+"/"+year_value+" "+"20:00:00";
                 try {
-                    date = new SimpleDateFormat("dd/MM/yyyy").parse(dateValue);
+                    date = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(dateValue);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                System.out.println(dateValue);
                 String timestamp =  Long.toString(date.getTime());
+                System.out.println(timestamp);
+                System.out.println(dateValue);
                 taskLoadUp(timestamp);
-                day_value = dayOfMonth;
-                month_value = month;
-                year_value = year;
-                popUpEvent();
             }
         });
     }
     public void createEvent(int dayOfMonth,int month,int year){
         Intent event_intent = new Intent(Intent.ACTION_INSERT);
         event_intent.setType("vnd.android.cursor.item/event");
-        event_intent.putExtra(CalendarContract.Events.TITLE, "Mercury Retrograde"); //NEEDS TO BE MOON PHASE
+        event_intent.putExtra(CalendarContract.Events.TITLE, moon_type);
         event_intent.putExtra(CalendarContract.Events.EVENT_LOCATION, "Outside");
-
-        GregorianCalendar calDate = new GregorianCalendar(year, month, dayOfMonth);
+        event_intent.putExtra(CalendarContract.Events.DESCRIPTION,moon_phase);
         event_intent.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, false);
         event_intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,
-                calDate.getTimeInMillis());
+                date.getTime());
         event_intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME,
-                calDate.getTimeInMillis()+60*60*1000);
+                date.getTime()+(60*60*1000*2));
         startActivity(event_intent);
     }
 
@@ -107,6 +112,7 @@ public class CalendarActivity extends MainActivity {
         close = (TextView) popDialog.findViewById(R.id.close);
         eventImage = (ImageView) popDialog.findViewById(R.id.eventimage);
         eventInfo = (TextView) popDialog.findViewById(R.id.eventinfo);
+        moonPhase = (TextView) popDialog.findViewById(R.id.moonphase);
         confirm = (Button) popDialog.findViewById(R.id.confirm);
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,6 +121,7 @@ public class CalendarActivity extends MainActivity {
             }
         });
         eventInfo.setText(moon_type);
+        moonPhase.setText(moon_phase);
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,12 +167,13 @@ public class CalendarActivity extends MainActivity {
                 if (json != null) {
                     JSONObject jsonObj = json.getJSONObject(0);
                     moon_type = jsonObj.getString("Moon");
-                    System.out.println(moon_type);
+                    moon_phase = jsonObj.getString("Phase");
                     Pattern pt = Pattern.compile("[^a-zA-Z0-9]");
                     Matcher match = pt.matcher(moon_type);
                     while (match.find()) {
                         moon_type = moon_type.replace(match.group(), "");
                     }
+                    popUpEvent();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
