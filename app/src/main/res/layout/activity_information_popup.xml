@@ -1,6 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent"
+	android:layout_height="wrap_content"
 	android:layout_gravity="center"
 	android:layout_marginLeft="2dp"
 	android:layout_marginTop="20dp"
@@ -31,21 +31,23 @@
 	 	Table Layout = https://www.tutorialspoint.com/android/android_table_layout.htm
 	 -->
 	<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
 		android:layout_below="@+id/objectimage"
 		android:layout_marginTop="30dp"
 		android:stretchColumns="2">
 
 		<TableRow
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content">
+			android:layout_height="wrap_content"
+			android:background="@drawable/border">
 
 			<TextView
-				android:id="@+id/Object"
+				android:id="@+id/object"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_column="1"
+				android:paddingLeft="5dp"
 				android:text="@string/subject"
 				android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
@@ -53,9 +55,9 @@
 				android:id="@+id/objectInfo"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:paddingRight="40dp"
 				android:layout_column="2"
-				android:layout_marginRight="40dp"
+				android:background="@drawable/border"
+				android:paddingRight="20dp"
 				android:text="@string/placeholder"
 				android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
@@ -63,13 +65,15 @@
 
 		<TableRow
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content">
+			android:layout_height="wrap_content"
+			android:background="@drawable/border">
 
 			<TextView
 				android:id="@+id/mass"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_column="1"
+				android:paddingLeft="5dp"
 				android:text="@string/mass"
 				android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
@@ -77,21 +81,24 @@
 				android:id="@+id/massInfo"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:paddingRight="40dp"
 				android:layout_column="2"
+				android:background="@drawable/border"
+				android:paddingRight="20dp"
 				android:text="@string/placeholder"
 				android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 		</TableRow>
 
 		<TableRow
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content">
+			android:layout_height="wrap_content"
+			android:background="@drawable/border">
 
 			<TextView
 				android:id="@+id/dimensions"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_column="1"
+				android:paddingLeft="5dp"
 				android:text="@string/diametersize"
 				android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
@@ -99,23 +106,25 @@
 				android:id="@+id/dimensionInfo"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:paddingRight="40dp"
 				android:layout_column="2"
+				android:background="@drawable/border"
+				android:paddingRight="20dp"
 				android:text="@string/placeholder"
-				android:textColor="@color/white"
 				android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
 		</TableRow>
 
 		<TableRow
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content">
+			android:layout_height="wrap_content"
+			android:background="@drawable/border">
 
 			<TextView
 				android:id="@+id/gravity"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_column="1"
+				android:paddingLeft="5dp"
 				android:text="@string/gravity"
 				android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
@@ -123,21 +132,25 @@
 				android:id="@+id/gravityinfo"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:paddingRight="40dp"
 				android:layout_column="2"
+				android:background="@drawable/border"
+				android:paddingRight="20dp"
 				android:text="@string/placeholder"
 				android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
 		</TableRow>
+
 		<TableRow
 			android:layout_width="wrap_content"
-			android:layout_height="wrap_content">
+			android:layout_height="wrap_content"
+			android:background="@drawable/border">
 
 			<TextView
 				android:id="@+id/fact"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_column="1"
+				android:paddingLeft="5dp"
 				android:text="@string/fact"
 				android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
@@ -145,8 +158,11 @@
 				android:id="@+id/factinfo"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:paddingRight="40dp"
 				android:layout_column="2"
+				android:background="@drawable/border"
+				android:ellipsize="end"
+				android:maxLines="100"
+				android:paddingRight="20dp"
 				android:text="@string/placeholder"
 				android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 

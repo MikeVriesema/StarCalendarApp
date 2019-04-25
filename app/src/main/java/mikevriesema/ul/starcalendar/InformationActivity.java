@@ -26,6 +26,8 @@ public class InformationActivity extends MainActivity {
     TextView objectInfo;
     TextView massInfo;
     TextView dimensionInfo;
+    TextView gravInfo;
+    TextView factInfo;
     TextView close;
     ImageView objectimage;
     ImageView starImage;
@@ -68,10 +70,14 @@ public class InformationActivity extends MainActivity {
         objectInfo = (TextView) infoPopup.findViewById(R.id.objectInfo);
         massInfo = (TextView) infoPopup.findViewById(R.id.massInfo);
         dimensionInfo = (TextView) infoPopup.findViewById(R.id.dimensionInfo);
+        gravInfo = (TextView) infoPopup.findViewById(R.id.gravityinfo);
+        factInfo = (TextView) infoPopup.findViewById(R.id.factinfo);
 
         objectInfo.setText(objectName);
         dimensionInfo.setText(starDB.getStarDimensions((objectName)));
         massInfo.setText(starDB.getStarMass((objectName)));
+        gravInfo.setText(starDB.getStarGravity((objectName)));
+        factInfo.setText(starDB.getStarDescriptions((objectName)));
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

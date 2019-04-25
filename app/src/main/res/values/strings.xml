@@ -74,15 +74,15 @@
     </string-array>
 
     <string-array name="spacegrav_array">
-        <item>Mercury</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Moon</item>
-        <item>Sun</item>
-        <item>ISS</item>
-        <item>Spacecraft</item>
-        <item>Meteor</item>
+        <item>3.7 m/s²</item>
+        <item>8.9 m/s²</item>
+        <item>9.8 m/s²</item>
+        <item>3.7 m/s²</item>
+        <item>1.6 m/s²</item>
+        <item>274 m/s²</item>
+        <item>8.8 m/s²</item>
+        <item>N/A</item>
+        <item>0 m/s² appx</item>
     </string-array>
 
     <string-array name="spacedesc_array">
