@@ -10,22 +10,39 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.support.annotation.NonNull;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class CalendarActivity extends MainActivity {
 
     CalendarView calendar;
     TextView dateplan;
+    String url;
+    String moon_type;
     TextView close;
+    TextView eventInfo;
     ImageView eventImage;
     Button confirm;
     Dialog popDialog;
@@ -41,7 +58,7 @@ public class CalendarActivity extends MainActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar);
-
+        moon_type = getString(R.string.moon);
         popDialog = new Dialog(this);
         calendar = (CalendarView) findViewById(R.id.calendar);
         dateplan = (TextView) findViewById(R.id.date);
@@ -52,6 +69,16 @@ public class CalendarActivity extends MainActivity {
                 String events = "";
                 String newDate = dayOfMonth + " of " + months[month] + " " + year + "\n" + events;
                 dateplan.setText(newDate);
+                String dateValue=""+dayOfMonth+"/"+month+"/"+year;
+                Date date= null;
+                try {
+                    date = new SimpleDateFormat("dd/MM/yyyy").parse(dateValue);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                System.out.println(dateValue);
+                String timestamp =  Long.toString(date.getTime());
+                taskLoadUp(timestamp);
                 day_value = dayOfMonth;
                 month_value = month;
                 year_value = year;
@@ -79,6 +106,7 @@ public class CalendarActivity extends MainActivity {
         popDialog.setContentView(R.layout.activity_event_info);
         close = (TextView) popDialog.findViewById(R.id.close);
         eventImage = (ImageView) popDialog.findViewById(R.id.eventimage);
+        eventInfo = (TextView) popDialog.findViewById(R.id.eventinfo);
         confirm = (Button) popDialog.findViewById(R.id.confirm);
         confirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +114,7 @@ public class CalendarActivity extends MainActivity {
                 createEvent(day_value,month_value,year_value);
             }
         });
+        eventInfo.setText(moon_type);
         close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,8 +122,57 @@ public class CalendarActivity extends MainActivity {
             }
         });
         popDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        eventImage.setImageBitmap(ImageViaAssets("event_image.png"));
+        eventImage.setImageBitmap(ImageViaAssets("Moon.png"));
         popDialog.show();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+    }
+
+    public void taskLoadUp(String timestamp) {
+        if (FetchData.isNetworkAvailable(getApplicationContext())) {
+            CalendarActivity.DownloadMoon task = new CalendarActivity.DownloadMoon();
+            task.execute(timestamp);
+        } else {
+            Toast.makeText(getApplicationContext(), getString(R.string.no_internet), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    class DownloadMoon extends AsyncTask<String, Void, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        protected String doInBackground(String... args) {
+            url = "http://api.farmsense.net/v1/moonphases/?d=" + args[0];
+            String xml = FetchData.executeGet(url);
+            return xml;
+        }
+
+        @Override
+        protected void onPostExecute(String xml) {
+            System.out.println(xml);
+            try {
+                JSONArray json = new JSONArray(xml);
+                if (json != null) {
+                    JSONObject jsonObj = json.getJSONObject(0);
+                    moon_type = jsonObj.getString("Moon");
+                    System.out.println(moon_type);
+                    Pattern pt = Pattern.compile("[^a-zA-Z0-9]");
+                    Matcher match = pt.matcher(moon_type);
+                    while (match.find()) {
+                        moon_type = moon_type.replace(match.group(), "");
+                    }
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+
+                Toast.makeText(getApplicationContext(), getString(R.string.moon_error), Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }
 

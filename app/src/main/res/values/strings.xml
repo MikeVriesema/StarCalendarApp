@@ -22,11 +22,13 @@
     <string name="disclaimer">All times are in relation to system time!</string>
     <string name="change">Change</string>
     <string name="city_error">Error, Change City!</string>
+    <string name="moon_error">Error, Unable to load moon data!</string>
     <string name="sunrise">Sunrise: </string>
     <string name="sunset">Sunset: </string>
     <string name="wind">Wind: </string>
     <string name="humidity">Humidity: </string>
     <string name="pressure">Pressure: </string>
+    <string name="moon">Moon</string>
     <string name="fact">Fact: </string>
     <string name="about">About</string>
     <string name="about1">This app is designed to help you observe the night sky,currently with emphasis on the moon phases.\n\nThere are options to view the weather in your location to plan before going stargazing aswell as a compass to get your orientation right.\n

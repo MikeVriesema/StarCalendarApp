@@ -103,7 +103,7 @@ public class WeatherActivity extends MainActivity {
     }
 
     public void taskLoadUp(String query) {
-        if (FetchWeather.isNetworkAvailable(getApplicationContext())) {
+        if (FetchData.isNetworkAvailable(getApplicationContext())) {
             DownloadWeather task = new DownloadWeather();
             task.execute(query);
         } else {
@@ -119,7 +119,7 @@ public class WeatherActivity extends MainActivity {
         }
         protected String doInBackground(String...args) {
             url = "http://api.openweathermap.org/data/2.5/weather?q=" + args[0] + "&units=metric&appid=" + getString(R.string.api_key);
-            String xml = FetchWeather.executeGet(url);
+            String xml = FetchData.executeGet(url);
             System.out.println(xml);
             return xml;
         }
@@ -143,7 +143,7 @@ public class WeatherActivity extends MainActivity {
                     wind_speed.setText(getString(R.string.wind)+ json.getJSONObject("wind").getString("speed")+" km " + fetchDirection(json.getJSONObject("wind").getString("deg")));
                     pos.setText("Lon: "+json.getJSONObject("coord").getString("lon")+" Lat: "+json.getJSONObject("coord").getString("lat"));
                     updatedField.setText(df.format(new Date(json.getLong("dt") * 1000)));
-                    weatherIcon.setText(Html.fromHtml(FetchWeather.setWeatherIcon(details.getInt("id"),
+                    weatherIcon.setText(Html.fromHtml(FetchData.setWeatherIcon(details.getInt("id"),
                             json.getJSONObject("sys").getLong("sunrise") * 1000,
                             json.getJSONObject("sys").getLong("sunset") * 1000)));
 
@@ -151,6 +151,7 @@ public class WeatherActivity extends MainActivity {
                 }
             } catch (JSONException e) {
                 Toast.makeText(getApplicationContext(), getString(R.string.city_error), Toast.LENGTH_SHORT).show();
+                taskLoadUp(getString(R.string.city_default));
             }
         }
 

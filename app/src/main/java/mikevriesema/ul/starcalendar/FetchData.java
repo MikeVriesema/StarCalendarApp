@@ -15,7 +15,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Date;
 
-public class FetchWeather {
+public class FetchData {
 
     /*
      * SOURCE:
@@ -95,5 +95,4 @@ public class FetchWeather {
         return icon;
     }
 }
-
 
